@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="org.fyp.model.Account" table="accounts" schema="estore3">
+        <id name="accountId">
+            <column name="account_id" sql-type="int(11)"/>
+        </id>
+        <property name="dateJoined">
+            <column name="date_joined" sql-type="datetime"/>
+        </property>
+        <property name="name">
+            <column name="name" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="email">
+            <column name="email" sql-type="varchar(60)" length="60"/>
+        </property>
+        <property name="phone">
+            <column name="phone" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="accountType">
+            <column name="account_type" sql-type="set('administrator', 'customer')"/>
+        </property>
+        <property name="paymentType">
+            <column name="payment_type" sql-type="set('visa', 'mastercard', 'amex')" not-null="true"/>
+        </property>
+        <property name="loyaltyCard">
+            <column name="loyalty_card" sql-type="tinyint(1)" not-null="true"/>
+        </property>
+        <property name="password">
+            <column name="password" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="StockReview">
+            <column name="address_street" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="addressCity">
+            <column name="address_city" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="addressCountry">
+            <column name="address_country" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <set name="carts" inverse="true">
+            <key>
+                <column name="account_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="org.fyp.model.Cart"/>
+        </set>
+        <set name="orders" inverse="true">
+            <key>
+                <column name="account_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="org.fyp.model.Order"/>
+        </set>
+        <set name="sessions" inverse="true">
+            <key>
+                <column name="account_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="org.fyp.model.Session"/>
+        </set>
+        <set name="stockReviews" inverse="true">
+            <key>
+                <column name="account_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="org.fyp.model.StockReview"/>
+        </set>
+    </class>
+</hibernate-mapping>

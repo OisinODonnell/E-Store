@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="org.fyp.model.Session" table="sessions" schema="estore3">
+        <id name="sessionId">
+            <column name="session_id" sql-type="int(11)"/>
+        </id>
+        <property name="dateStart">
+            <column name="date_start" sql-type="datetime"/>
+        </property>
+        <property name="dateEnd">
+            <column name="date_end" sql-type="datetime" not-null="true"/>
+        </property>
+        <property name="accountId">
+            <column name="account_id" sql-type="int(11)"/>
+        </property>
+        <many-to-one name="account" class="org.fyp.model.Account">
+            <column name="account_id"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

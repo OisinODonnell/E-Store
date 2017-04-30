@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="org.fyp.model.StockItem" table="stock_items" schema="estore3">
+        <id name="stockItemId">
+            <column name="stock_item_id" sql-type="int(11)"/>
+        </id>
+        <property name="title">
+            <column name="title" sql-type="varchar(45)" length="45"/>
+        </property>
+        <property name="stockLevel">
+            <column name="stock_level" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="image">
+            <column name="image" sql-type="longblob" not-null="true"/>
+        </property>
+        <property name="price">
+            <column name="price" sql-type="decimal(10,2)" precision="10" scale="2" not-null="true"/>
+        </property>
+        <property name="manufacturerId">
+            <column name="manufacturer_id" sql-type="int(11)"/>
+        </property>
+        <property name="itemCategoryId">
+            <column name="item_category_id" sql-type="int(11)"/>
+        </property>
+        <many-to-one name="manufacturer" class="org.fyp.model.Manufacturer">
+            <column name="manufacturer_id"/>
+        </many-to-one>
+        <many-to-one name="itemCategory" class="org.fyp.model.ItemCategory">
+            <column name="item_category_id"/>
+        </many-to-one>
+        <set name="cartItems" inverse="true">
+            <key>
+                <column name="stock_item_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="org.fyp.model.CartItem"/>
+        </set>
+        <set name="orderItems" inverse="true">
+            <key>
+                <column name="stock_item_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="org.fyp.model.OrderItem"/>
+        </set>
+        <set name="stockReviews" inverse="true">
+            <key>
+                <column name="stock_item_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="org.fyp.model.StockReview"/>
+        </set>
+    </class>
+</hibernate-mapping>

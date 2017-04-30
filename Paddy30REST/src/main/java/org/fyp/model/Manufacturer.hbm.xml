@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="org.fyp.model.Manufacturer" table="manufacturers" schema="estore3">
+        <id name="manufacturerId">
+            <column name="manufacturer_id" sql-type="int(11)"/>
+        </id>
+        <property name="name">
+            <column name="name" sql-type="varchar(45)" length="45"/>
+        </property>
+        <property name="contactName">
+            <column name="contact_name" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="contactPhone">
+            <column name="contact_phone" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="contactEmail">
+            <column name="contact_email" sql-type="varchar(60)" length="60"/>
+        </property>
+        <set name="stockItems" inverse="true">
+            <key>
+                <column name="manufacturer_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="org.fyp.model.StockItem"/>
+        </set>
+    </class>
+</hibernate-mapping>

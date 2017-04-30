@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="connection.url">jdbc:mysql://localhost:3333/estore3</property>
+    <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+      <mapping class="org.fyp.model.Account"/>
+      <mapping resource="org/fyp/model/Account.hbm.xml"/>
+      <mapping class="org.fyp.model.CartItem"/>
+      <mapping resource="org/fyp/model/CartItem.hbm.xml"/>
+      <mapping class="org.fyp.model.Cart"/>
+      <mapping resource="org/fyp/model/Cart.hbm.xml"/>
+      <mapping class="org.fyp.model.ItemCategory"/>
+      <mapping resource="org/fyp/model/ItemCategory.hbm.xml"/>
+      <mapping class="org.fyp.model.Manufacturer"/>
+      <mapping resource="org/fyp/model/Manufacturer.hbm.xml"/>
+      <mapping resource="org/fyp/model/OrderItem.hbm.xml"/>
+      <mapping class="org.fyp.model.OrderItem"/>
+      <mapping class="org.fyp.model.Order"/>
+      <mapping resource="org/fyp/model/Order.hbm.xml"/>
+      <mapping class="org.fyp.model.StockItem"/>
+      <mapping resource="org/fyp/model/StockItem.hbm.xml"/>
+      <mapping class="org.fyp.model.StockReview"/>
+      <mapping resource="org/fyp/model/StockReview.hbm.xml"/>
+      <mapping class="org.fyp.model.Session"/>
+      <mapping resource="org/fyp/model/Session.hbm.xml"/>
+      <!-- <property name="connection.username"/> -->
+    <!-- <property name="connection.password"/> -->
+
+    <!-- DB schema will be updated if needed -->
+    <!-- <property name="hbm2ddl.auto">update</property> -->
+  </session-factory>
+</hibernate-configuration>

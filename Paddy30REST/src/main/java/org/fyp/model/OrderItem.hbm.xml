@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="org.fyp.model.OrderItem" table="order_items" schema="estore3">
+        <composite-id mapped="true" class="org.fyp.model.OrderItemPK">
+            <key-property name="orderId">
+                <column name="order_id" sql-type="int(11)"/>
+            </key-property>
+            <key-property name="stockItemId">
+                <column name="stock_item_id" sql-type="int(11)"/>
+            </key-property>
+        </composite-id>
+        <property name="quantity">
+            <column name="quantity" sql-type="int(11)"/>
+        </property>
+        <property name="unitPrice">
+            <column name="unit_price" sql-type="decimal(10,2)" precision="10" scale="2"/>
+        </property>
+        <many-to-one name="order" class="org.fyp.model.Order">
+            <column name="order_id"/>
+        </many-to-one>
+        <many-to-one name="stockItem" class="org.fyp.model.StockItem">
+            <column name="stock_item_id"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

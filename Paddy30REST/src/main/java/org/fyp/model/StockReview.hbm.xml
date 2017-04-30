@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="org.fyp.model.StockReview" table="stock_reviews" schema="estore3">
+        <composite-id mapped="true" class="org.fyp.model.StockReviewPK">
+            <key-property name="stockItemId">
+                <column name="stock_item_id" sql-type="int(11)"/>
+            </key-property>
+            <key-property name="accountId">
+                <column name="account_id" sql-type="int(11)"/>
+            </key-property>
+        </composite-id>
+        <property name="rating">
+            <column name="rating" sql-type="set('1', '2', '3', '4', '5')"/>
+        </property>
+        <property name="comment">
+            <column name="comment" sql-type="varchar(100)" length="100" not-null="true"/>
+        </property>
+        <property name="date">
+            <column name="date" sql-type="datetime"/>
+        </property>
+        <many-to-one name="stockItem" class="org.fyp.model.StockItem">
+            <column name="stock_item_id"/>
+        </many-to-one>
+        <many-to-one name="account" class="org.fyp.model.Account">
+            <column name="account_id"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>
