@@ -52,10 +52,10 @@ public class StockItemController extends MainController {
         return stockItemRepo.findAllByItemCategoryId( itemCategoryId );
     }
 
-    @RequestMapping(value = "/Like/{titleLIke}", method = RequestMethod.GET)
+    @RequestMapping(value = "/Like/{titleLike}", method = RequestMethod.GET)
     public Collection<StockItem> getStockItem(@PathVariable("titleLike") String titleLike)
             throws ParseException, JsonProcessingException {
-        return stockItemRepo.findByTitleLike( titleLike );
+        return stockItemRepo.findByTitleLikeIgnoreCase( "%" + titleLike + "%" );
     }
 
     @RequestMapping(value = "/{stockItemId}", method = RequestMethod.GET)

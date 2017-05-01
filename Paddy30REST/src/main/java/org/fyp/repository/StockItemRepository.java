@@ -15,5 +15,5 @@ public interface StockItemRepository extends JpaRepository<StockItem, Integer> {
 
     Collection<StockItem> findAllByItemCategoryId(int itemCategoryId);
     Collection<StockItem> findAllByManufacturerId(int manufacturerId);
-    Collection<StockItem> findByTitleLike(String titleLike);
+    Collection<StockItem> findByTitleLikeIgnoreCase(String titleLike);
 }

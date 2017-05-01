@@ -74,10 +74,6 @@ public class AccountController extends MainController{
     @RequestMapping(value = "/delete", method=RequestMethod.GET)
     public void delete(Account account)     {  accountRepo.delete(account);    }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public Collection<Account> getAccounts() throws JsonProcessingException {
-        return accountRepo.findAll();
-    }
 
 
 }

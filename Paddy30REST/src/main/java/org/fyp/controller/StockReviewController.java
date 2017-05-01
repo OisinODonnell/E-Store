@@ -58,7 +58,5 @@ public class StockReviewController extends MainController {
     ) throws ParseException, JsonProcessingException {
         return stockReviewRepo.findAllByAccountId( accountId );
 
-
-
     }
 }
