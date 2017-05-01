@@ -10,4 +10,5 @@ import javax.transaction.Transactional;
 @Transactional
 public interface ManufacturerRepository extends JpaRepository<Manufacturer, Integer> {
     Manufacturer findByManufacturerId(Integer manufacturerId);
+    Integer deleteByManufacturerId(Integer manufacturerId);
 }

@@ -12,6 +12,6 @@ import java.util.Collection;
 public interface OrderRepository extends JpaRepository<Order, Integer> {
     Collection<Order> findAllByAccountId(int accountId);
     Order findByOrderId (int orderId);
-
+    Integer deleteByOrderId(int orderId);
 
 }

@@ -32,6 +32,22 @@ public class ManufacturerController extends MainController {
     @RequestMapping(value = "/delete", method=RequestMethod.GET)
     public void delete(Manufacturer manufacturer)     {  manufacturerRepo.delete(manufacturer);    }
 
+    @RequestMapping(value = "/delete/{manufacturerId}", method=RequestMethod.GET)
+    public String deleteById(@PathVariable("manufacturerId") int manufacturerId) throws ParseException {
+
+        if(manufacturerRepo.findByManufacturerId(manufacturerId)!=null) {
+            manufacturerRepo.deleteByManufacturerId(manufacturerId);
+        } else {
+            return "ManufacturerID : " + manufacturerId + " does not exist";
+        }
+
+        if(manufacturerRepo.findByManufacturerId(manufacturerId)==null) {
+            return "ManufacturerID : " + manufacturerId + " was deleted.";
+        } else {
+            return null;
+        }
+    }
+
     @RequestMapping(value = "/{manufacturerId}", method = RequestMethod.GET)
     public Manufacturer getManufacturer(@PathVariable("manufacturerId") int manufacturerId) throws ParseException, JsonProcessingException {
         return manufacturerRepo.findByManufacturerId( manufacturerId );

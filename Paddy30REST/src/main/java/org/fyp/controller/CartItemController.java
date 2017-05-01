@@ -60,18 +60,16 @@ public class CartItemController extends MainController {
         }
     }
 
-
     @RequestMapping(value = "/Cart/{cartId}", method = RequestMethod.GET)
-    public Collection<CartItem> getCartItemsByCartId(@PathVariable("cartId") int cartId
-
-    ) throws ParseException, JsonProcessingException {
+    public Collection<CartItem> getCartItemsByCartId(@PathVariable("cartId") int cartId)
+        throws ParseException, JsonProcessingException {
         return cartItemRepo.findAllByCartId( cartId );
     }
     
     @RequestMapping(value = "/StockItem/{stockItemId}", method = RequestMethod.GET)
-    public Collection<CartItem> getCartItemsByStockItemId(@PathVariable("stockItemId") int stockItemId
-
-    ) throws ParseException, JsonProcessingException {
+    public Collection<CartItem> getCartItemsByStockItemId(@PathVariable("stockItemId") int stockItemId)
+        throws ParseException, JsonProcessingException {
         return cartItemRepo.findAllByStockItemId( stockItemId );
     }
+
 }

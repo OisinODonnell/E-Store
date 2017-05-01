@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
 import java.util.Collection;
 
 /**
@@ -48,6 +49,22 @@ public class OrderController extends MainController {
     public void delete(Order order)
     {
         orderRepo.delete(order);
+    }
+
+    @RequestMapping(value = "/delete/{orderId}", method=RequestMethod.GET)
+    public String deleteById(@PathVariable("orderId") int orderId) throws ParseException {
+
+        if(orderRepo.findByOrderId(orderId)!=null) {
+            orderRepo.deleteByOrderId(orderId);
+        } else {
+            return "OrderID : " + orderId + " does not exist";
+        }
+
+        if(orderRepo.findByOrderId(orderId)==null) {
+            return "OrderID : " + orderId + " was deleted.";
+        } else {
+            return null;
+        }
     }
 
     @RequestMapping(value = "/Account/{accountId}", method=RequestMethod.GET)

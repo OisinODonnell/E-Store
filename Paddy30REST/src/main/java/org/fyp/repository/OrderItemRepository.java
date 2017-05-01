@@ -11,6 +11,5 @@ import java.util.Collection;
 @Transactional
 public interface OrderItemRepository extends JpaRepository<OrderItem, Integer> {
     Collection<OrderItem> findAllByOrderId(int orderId);
-   // Collection<OrderItem> findAllByAccountId(int accountId);
 
 }

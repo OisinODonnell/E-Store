@@ -10,4 +10,5 @@ import javax.transaction.Transactional;
 @Transactional
 public interface ItemCategoryRepository extends JpaRepository<ItemCategory, Integer> {
     ItemCategory findByItemCategoryId(Integer itemCategoryId);
+    Integer deleteByItemCategoryId(Integer itemCategoryId);
 }

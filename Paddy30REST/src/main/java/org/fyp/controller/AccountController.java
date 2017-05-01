@@ -77,7 +77,11 @@ public class AccountController extends MainController{
     @RequestMapping(value = "/delete/{accountId}", method=RequestMethod.GET)
     public String deleteById(@PathVariable("accountId") int accountId) throws ParseException {
 
-        accountRepo.deleteByAccountId(accountId);
+        if(accountRepo.findByAccountId(accountId)!=null) {
+            accountRepo.deleteByAccountId(accountId);
+        } else {
+            return "AccountID : " + accountId + " does not exist";
+        }
 
         if(accountRepo.findByAccountId(accountId)==null) {
             return "Account " + accountId + " was deleted.";

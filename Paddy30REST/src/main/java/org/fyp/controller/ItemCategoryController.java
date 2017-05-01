@@ -40,6 +40,26 @@ public class ItemCategoryController extends MainController {
     public void delete(ItemCategory itemCategory) { itemCategoryRepo.delete(itemCategory);    }
 
 
+    @RequestMapping(value = "/delete/{itemCategoryId}", method=RequestMethod.GET)
+    public String deleteById(@PathVariable("itemCategoryId") int itemCategoryId) throws ParseException {
+
+        if(itemCategoryRepo.findByItemCategoryId(itemCategoryId)!=null) {
+            if (stockItemRepo.findAllByItemCategoryId(itemCategoryId).size() > 0) {
+                return "Cannot delete Category : " + itemCategoryId + " when stock exists in this category";
+            } else {
+                itemCategoryRepo.deleteByItemCategoryId(itemCategoryId);
+            }
+        } else {
+            return "Item Category : " + itemCategoryId + " does not exist";
+        }
+
+        if(itemCategoryRepo.findByItemCategoryId(itemCategoryId)==null) {
+            return "Item Category (id) " + itemCategoryId + " was deleted.";
+        } else {
+            return null;
+        }
+    }
+
     @RequestMapping(value = "/{itemCategoryId}", method = RequestMethod.GET)
     public ItemCategory getItemCategory(@PathVariable("itemCategoryId") int itemCategoryId) throws ParseException, JsonProcessingException {
         return itemCategoryRepo.findByItemCategoryId( itemCategoryId );
