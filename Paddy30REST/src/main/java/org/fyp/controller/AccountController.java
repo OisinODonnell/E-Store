@@ -71,8 +71,12 @@ public class AccountController extends MainController{
         accountRepo.save(account);
     }
 
-    @RequestMapping(value = "/delete", method=RequestMethod.GET)
+    @RequestMapping(value = "/delete/", method=RequestMethod.GET)
     public void delete(Account account)     {  accountRepo.delete(account);    }
+
+    @RequestMapping(value = "/delete/{accountId}", method=RequestMethod.GET)
+    public void deleteById(@PathVariable("accountId") int accountId) throws ParseException {
+        accountRepo.deleteByAccountId(accountId);    }
 
 
 

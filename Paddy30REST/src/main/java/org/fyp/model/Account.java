@@ -244,7 +244,7 @@ public class Account extends BaseEntity{
         return result;
     }
 
-    @OneToMany(mappedBy = "account", fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "account", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
     //@Fetch(value = FetchMode.SUBSELECT)
     public Collection<Cart> getCarts() {
         return carts;
@@ -253,7 +253,7 @@ public class Account extends BaseEntity{
         this.carts = carts;
     }
 
-    @OneToMany(mappedBy = "account", fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "account", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
     //@Fetch(value = FetchMode.SUBSELECT)
     public Collection<Order> getOrders()     {
         return orders;
@@ -262,7 +262,7 @@ public class Account extends BaseEntity{
         this.orders = orders;
     }
 
-    @OneToMany(mappedBy = "account", fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "account", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
     //@Fetch(value = FetchMode.SUBSELECT)
     public Collection<Session> getSessions() {
         return sessions;
@@ -272,7 +272,7 @@ public class Account extends BaseEntity{
         this.sessions = sessions;
     }
 
-    @OneToMany(mappedBy = "account", fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "account", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
     //@Fetch(value = FetchMode.SUBSELECT)
     public Collection<StockReview> getStockReviews() {
         return stockReviews;

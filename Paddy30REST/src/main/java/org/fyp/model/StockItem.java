@@ -196,7 +196,7 @@ public class StockItem extends BaseEntity{
         this.itemCategory = itemCategory;
     }
 
-    @OneToMany(mappedBy = "stockItem", fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "stockItem", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
     @Fetch(value = FetchMode.SUBSELECT)
     public Collection<StockReview> getStockReviews() {
         return stockReviews;

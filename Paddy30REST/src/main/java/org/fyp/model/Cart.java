@@ -116,7 +116,7 @@ public class Cart extends BaseEntity{
         return result;
     }
 
-    @OneToMany(mappedBy = "cart", fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "cart", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
     //@Fetch(value = FetchMode.SUBSELECT)
     public Collection<CartItem> getCartItems() {
         return cartItems;

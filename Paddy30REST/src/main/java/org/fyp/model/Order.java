@@ -112,7 +112,7 @@ public class Order extends BaseEntity{
         return result;
     }
 
-    @OneToMany(mappedBy = "order", fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "order", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
     @Fetch(value = FetchMode.SUBSELECT)
     public Collection<OrderItem> getOrderItems() {
         return orderItems;
