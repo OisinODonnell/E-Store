@@ -11,5 +11,6 @@ import java.util.Collection;
 public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
     Collection<CartItem> findAllByCartId(int cartId);
     Collection<CartItem> findAllByStockItemId(int stockItemId);
-
+    Integer deleteByCartIdAndStockItemId(int cartId, int stockItemId);
+    CartItem findByCartIdAndStockItemId(int cartId, int stockItemId);
 }

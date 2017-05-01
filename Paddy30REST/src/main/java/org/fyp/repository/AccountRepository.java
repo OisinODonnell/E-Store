@@ -9,6 +9,6 @@ import javax.transaction.Transactional;
 @Transactional
 public interface AccountRepository extends JpaRepository<Account, Integer> {
     Account findByAccountId(int accountId);
-    void deleteByAccountId(int accountId);
+    Integer deleteByAccountId(int accountId);
 
 }

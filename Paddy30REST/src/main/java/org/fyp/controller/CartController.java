@@ -1,9 +1,7 @@
 package org.fyp.controller;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.fyp.model.Account;
 import org.fyp.model.Cart;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,6 +49,18 @@ public class CartController extends MainController {
         cartRepo.delete(cart);
     }
 
+    @RequestMapping(value = "/delete/{CartId}", method=RequestMethod.GET)
+    public String deleteById(@PathVariable("cartId") int cartId) throws ParseException {
+
+        cartRepo.deleteByCartId(cartId);
+
+        if(cartRepo.findByCartId(cartId)==null) {
+            return "Cart " + cartId + " was deleted.";
+        } else {
+            return null;
+        }
+    }
+
     @RequestMapping(value = "/Account/{accountId}", method=RequestMethod.GET)
     public Collection<Cart> getCartsByAccountId(@PathVariable int accountId) {
         return cartRepo.findAllByAccountId( accountId);
@@ -58,7 +68,9 @@ public class CartController extends MainController {
 
     @RequestMapping(value = "/{cartId}", method=RequestMethod.GET)
     public Cart getCartByCartId(@PathVariable int cartId) {
-        return cartRepo.findByCartId( cartId);
+        Cart cart = cartRepo.findByCartId(cartId);
+        cart.setCartItems(cartItemRepo.findAllByCartId(cartId));
+        return cart;
     }
 
 }

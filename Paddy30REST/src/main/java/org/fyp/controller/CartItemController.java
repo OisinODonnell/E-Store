@@ -37,7 +37,29 @@ public class CartItemController extends MainController {
     }
 
     @RequestMapping(value = "/delete", method=RequestMethod.GET)
-    public void delete(CartItem cartItem)     {  cartItemRepo.delete(cartItem);    }
+    public void delete(CartItem cartItem)     {  cartItemRepo.delete(cartItem);}
+
+    @RequestMapping(value = "/delete/{cartId}/{StockItemId}", method=RequestMethod.GET)
+    public String deleteById(@PathVariable("cartId") int cartId, @PathVariable("StockItemId") int stockItemId)
+        throws ParseException {
+
+        // check that item exists
+        if(cartItemRepo.findByCartIdAndStockItemId(cartId, stockItemId)!=null) { // it exists
+            // now delete it
+            cartItemRepo.deleteByCartIdAndStockItemId(cartId, stockItemId);
+        } else {
+            return "CartId : " + cartId + " and StockItemId : " + stockItemId + " Does not exist";
+        }
+
+        // finally check that its gone
+
+        if(cartItemRepo.findByCartIdAndStockItemId(cartId, stockItemId)==null) {
+            return "Cart Id, " + cartId + ", Stock Item:  " + stockItemId + " was deleted.";
+        } else {
+            return null;
+        }
+    }
+
 
     @RequestMapping(value = "/Cart/{cartId}", method = RequestMethod.GET)
     public Collection<CartItem> getCartItemsByCartId(@PathVariable("cartId") int cartId
@@ -45,6 +67,7 @@ public class CartItemController extends MainController {
     ) throws ParseException, JsonProcessingException {
         return cartItemRepo.findAllByCartId( cartId );
     }
+    
     @RequestMapping(value = "/StockItem/{stockItemId}", method = RequestMethod.GET)
     public Collection<CartItem> getCartItemsByStockItemId(@PathVariable("stockItemId") int stockItemId
 
