@@ -34,4 +34,8 @@ public class SessionController extends MainController{
         sessionRepo.delete(session);
     }
 
+    @RequestMapping(value = "/Account/{accountId}", method=RequestMethod.GET)
+    public  Collection<Session> getSessionsByAccountId(int accountId)    {
+        return sessionRepo.findAllByAccountId(accountId);
+    }
 }

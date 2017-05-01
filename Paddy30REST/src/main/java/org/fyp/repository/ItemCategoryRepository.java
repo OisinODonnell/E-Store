@@ -8,6 +8,6 @@ import javax.transaction.Transactional;
 
 @RepositoryRestResource(collectionResourceRel = "itemCategory", path = "ItemCategories")
 @Transactional
-public interface ItemCategoryRepository extends JpaRepository<ItemCategory, Long> {
-    ItemCategory findByItemCategoryId(Long itemCategoryId);
+public interface ItemCategoryRepository extends JpaRepository<ItemCategory, Integer> {
+    ItemCategory findByItemCategoryId(Integer itemCategoryId);
 }

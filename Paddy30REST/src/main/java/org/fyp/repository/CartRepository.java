@@ -11,5 +11,6 @@ import java.util.Collection;
 public interface CartRepository extends JpaRepository<Cart,Integer> {
     Collection<Cart> findAllByAccountId(int accountId);
     Cart findByCartId(int cartId);
+
 }
 

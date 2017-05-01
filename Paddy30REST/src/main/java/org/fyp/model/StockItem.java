@@ -25,7 +25,9 @@ public class StockItem extends BaseEntity{
     private BigDecimal price;
     private int manufacturerId;
     private int itemCategoryId;
+    @JsonBackReference
     private Manufacturer manufacturer;
+    @JsonBackReference
     private ItemCategory itemCategory;
     @JsonBackReference
     private Collection<StockReview> stockReviews;

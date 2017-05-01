@@ -3,6 +3,7 @@ package org.fyp.controller;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.fyp.model.*;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -72,7 +73,10 @@ public class AccountController extends MainController{
     @RequestMapping(value = "/delete", method=RequestMethod.GET)
     public void delete(Account account)     {  accountRepo.delete(account);    }
 
-
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public Collection<Account> getAccounts() throws JsonProcessingException {
+        return accountRepo.findAll();
+    }
 
 
 }

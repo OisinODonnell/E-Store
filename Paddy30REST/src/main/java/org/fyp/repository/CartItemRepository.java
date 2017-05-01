@@ -8,6 +8,8 @@ import java.util.Collection;
 
 //@RepositoryRestResource(collectionResourceRel = "cartItem", path = "CartItems")
 @Transactional
-public interface CartItemRepository extends JpaRepository<CartItem, Long> {
+public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
     Collection<CartItem> findAllByCartId(int cartId);
+    Collection<CartItem> findAllByStockItemId(int stockItemId);
+
 }

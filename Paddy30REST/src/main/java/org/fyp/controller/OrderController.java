@@ -49,5 +49,15 @@ public class OrderController extends MainController {
         orderRepo.delete(order);
     }
 
+    @RequestMapping(value = "/Account/{accountId}", method=RequestMethod.GET)
+    public Collection<Order> getOrdersByAccountId(int accountId) {
+        return orderRepo.findAllByAccountId( accountId);
+    }
+
+    @RequestMapping(value = "/{orderId}", method=RequestMethod.GET)
+    public Order getOrderByOrderId(int orderId) {
+        return orderRepo.findByOrderId( orderId);
+    }
+
 
 }

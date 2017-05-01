@@ -10,6 +10,7 @@ import java.util.Collection;
 @Transactional
 public interface StockReviewRepository extends JpaRepository<StockReview, Integer> {
     Collection<StockReview> findAllByAccountId(int accountId);
-
+    Collection<StockReview> findAllByStockItemId(int stockItemId);
+    StockReview findByStockItemIdAndAccountId( int stockItemId, int accountId );
 
 }

@@ -9,7 +9,7 @@ import java.util.Collection;
 
 @RepositoryRestResource(collectionResourceRel = "order", path = "Orders")
 @Transactional
-public interface OrderRepository extends JpaRepository<Order, Long> {
+public interface OrderRepository extends JpaRepository<Order, Integer> {
     Collection<Order> findAllByAccountId(int accountId);
     Order findByOrderId (int orderId);
 

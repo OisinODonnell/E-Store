@@ -1,10 +1,13 @@
 package org.fyp.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.fyp.model.Manufacturer;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
 import java.util.Collection;
 
 /**
@@ -29,4 +32,14 @@ public class ManufacturerController extends MainController {
     @RequestMapping(value = "/delete", method=RequestMethod.GET)
     public void delete(Manufacturer manufacturer)     {  manufacturerRepo.delete(manufacturer);    }
 
+    @RequestMapping(value = "/{manufacturerId}", method = RequestMethod.GET)
+    public Manufacturer getManufacturer(@PathVariable("manufacturerId") int manufacturerId) throws ParseException, JsonProcessingException {
+        return manufacturerRepo.findByManufacturerId( manufacturerId );
+    }
+
+    // Remember that when calling Manufacturers, you need to include the forward slash after
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public Collection<Manufacturer> getManufacturers() throws ParseException, JsonProcessingException {
+        return manufacturerRepo.findAll();
+    }
 }

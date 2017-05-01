@@ -8,6 +8,6 @@ import javax.transaction.Transactional;
 
 @RepositoryRestResource(collectionResourceRel = "manufacturer", path = "Manufacturers")
 @Transactional
-public interface ManufacturerRepository extends JpaRepository<Manufacturer, Long> {
-    //public Manufacturer findByManufacturerId(Long manufacturerId);
+public interface ManufacturerRepository extends JpaRepository<Manufacturer, Integer> {
+    Manufacturer findByManufacturerId(Integer manufacturerId);
 }

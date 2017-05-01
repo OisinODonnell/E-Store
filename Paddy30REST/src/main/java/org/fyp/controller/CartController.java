@@ -37,14 +37,6 @@ public class CartController extends MainController {
         return cartRepo.findAll();
     }
 
-    @RequestMapping(value = "/{cartId}", method = RequestMethod.GET)
-    public Cart getCart(@PathVariable("cartId") int cartId) throws ParseException {
-        Cart cart = new Cart();
-
-        cart = cartRepo.findByCartId( cartId );
-
-        return cart;
-    }
 
 
     @RequestMapping(value = "/update", method=RequestMethod.GET)
@@ -57,6 +49,16 @@ public class CartController extends MainController {
     public void delete(Cart cart)
     {
         cartRepo.delete(cart);
+    }
+
+    @RequestMapping(value = "/Account/{accountId}", method=RequestMethod.GET)
+    public Collection<Cart> getCartsByAccountId(int accountId) {
+        return cartRepo.findAllByAccountId( accountId);
+    }
+
+    @RequestMapping(value = "/{cartId}", method=RequestMethod.GET)
+    public Cart getCartByCartId(int cartId) {
+        return cartRepo.findByCartId( cartId);
     }
 
 }

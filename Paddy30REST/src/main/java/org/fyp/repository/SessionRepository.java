@@ -9,6 +9,6 @@ import java.util.Collection;
 
 @RepositoryRestResource(collectionResourceRel = "session", path = "Sessions")
 @Transactional
-public interface SessionRepository extends JpaRepository<Session, Long> {
+public interface SessionRepository extends JpaRepository<Session, Integer> {
     Collection<Session> findAllByAccountId(int accountId);
 }
