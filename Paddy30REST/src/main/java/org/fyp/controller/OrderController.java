@@ -1,6 +1,7 @@
 package org.fyp.controller;
 
 import org.fyp.model.Order;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,7 +51,7 @@ public class OrderController extends MainController {
     }
 
     @RequestMapping(value = "/Account/{accountId}", method=RequestMethod.GET)
-    public Collection<Order> getOrdersByAccountId(int accountId) {
+    public Collection<Order> getOrdersByAccountId(@PathVariable int accountId) {
         return orderRepo.findAllByAccountId( accountId);
     }
 
