@@ -38,6 +38,27 @@ public class OrderItemController extends MainController {
     @RequestMapping(value = "/delete", method=RequestMethod.GET)
     public void delete(OrderItem orderItem)     {  orderItemRepo.delete(orderItem);    }
 
+    @RequestMapping(value = "/delete/{orderId}/{stockItemId}", method=RequestMethod.GET)
+    public String deleteById(@PathVariable("orderId") int orderId, @PathVariable("stockItemId") int stockItemId)
+            throws ParseException {
+
+        // check that item exists
+        if(orderItemRepo.findByOrderIdAndStockItemId(orderId, stockItemId)!=null) { // it exists
+            // now delete it
+            orderItemRepo.deleteByOrderIdAndStockItemId(orderId, stockItemId);
+        } else {
+            return "CartId : " + orderId + " and StockItemId : " + stockItemId + " Does not exist";
+        }
+
+        // finally check that its gone
+
+        if(orderItemRepo.findByOrderIdAndStockItemId(orderId, stockItemId)==null) {
+            return "Cart Id, " + orderId + ", Stock Item:  " + stockItemId + " was deleted.";
+        } else {
+            return null;
+        }
+    }
+
 
     @RequestMapping(value = "/Order/{orderId}", method = RequestMethod.GET)
     public Collection<OrderItem> getOrderItemsByOrderId(@PathVariable("orderId") int orderId
