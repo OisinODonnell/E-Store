@@ -34,11 +34,7 @@ public class StockItemController extends MainController {
         stockItemRepo.save(stockItem);
     }
 
-    @RequestMapping(value = "/delete", method=RequestMethod.GET)
-    public void delete(StockItem stockItem)    {
-        stockItemRepo.delete(stockItem);
-    }
-
+    // You cannot delete a StockItem. Not designed for that.
 
     @RequestMapping(value = "/Manufacturer/{manufacturerId}", method = RequestMethod.GET)
     public Collection<StockItem> getStockItemByManufacturerId(@PathVariable("manufacturerId") int manufacturerId)

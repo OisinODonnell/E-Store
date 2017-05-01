@@ -21,6 +21,7 @@ public class CartItem extends BaseEntity{
     private BigDecimal unitPrice;
     @JsonManagedReference
     private Cart cart;
+    @JsonManagedReference
     private StockItem stockItem;
 
     public CartItem() throws ParseException {

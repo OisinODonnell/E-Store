@@ -40,8 +40,6 @@ public class StockItem extends BaseEntity{
         price = new BigDecimal(0);
         manufacturerId = 0;
         itemCategoryId = 0;
-//        cartItems = new ArrayList<>();
-//        orderItems = new ArrayList<>();
         manufacturer = new Manufacturer();
         itemCategory = new ItemCategory();
         stockReviews = new ArrayList<>();
@@ -159,24 +157,6 @@ public class StockItem extends BaseEntity{
         result = 31 * result + itemCategoryId;
         return result;
     }
-
-//    @OneToMany(mappedBy = "stockItem", fetch=FetchType.LAZY)
-//    @Fetch(value = FetchMode.SUBSELECT)
-//    public Collection<CartItem> getCartItems() {
-//        return cartItems;
-//    }
-//    public void setCartItems(Collection<CartItem> cartItems) {
-//        this.cartItems = cartItems;
-//    }
-//
-//    @OneToMany(mappedBy = "stockItem", fetch=FetchType.LAZY)
-//    @Fetch(value = FetchMode.SUBSELECT)
-//    public Collection<OrderItem> getOrderItems() {
-//        return orderItems;
-//    }
-//    public void setOrderItems(Collection<OrderItem> orderItems) {
-//        this.orderItems = orderItems;
-//    }
 
     @ManyToOne
     @JoinColumn(name = "manufacturer_id", referencedColumnName = "manufacturer_id", nullable = false,insertable = false, updatable = false)

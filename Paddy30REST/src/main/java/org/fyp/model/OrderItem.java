@@ -1,5 +1,6 @@
 package org.fyp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.fyp.controller.AttributeCountException;
 
@@ -21,6 +22,7 @@ public class OrderItem extends BaseEntity{
     private BigDecimal unitPrice;
     @JsonManagedReference
     private Order order;
+    @JsonManagedReference
     private StockItem stockItem;
 
 

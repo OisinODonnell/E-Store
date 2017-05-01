@@ -35,13 +35,32 @@ public class StockReviewController extends MainController {
         stockReviewRepo.delete(stockReview);
     }
 
+    @RequestMapping(value = "/delete/{accountId}/{stockItemId}", method=RequestMethod.GET)
+    public String deleteById(@PathVariable("accountId") int accountId, @PathVariable("stockItemId") int stockItemId)
+            throws ParseException {
 
-    // not sure if this syntax is correct ... some testing needed when passing in two variables
-    @RequestMapping(value = "/{stockItemId, accountId}", method = RequestMethod.GET)
-    public StockReview getStockReview(  @PathVariable("stockItemId") int stockItemId,
-                                        @PathVariable("accountId") int accountId
+        // check that item exists
+        if(stockReviewRepo.findByAccountIdAndStockItemId(accountId, stockItemId)!=null) { // it exists
+            // now delete it
+            stockReviewRepo.deleteByAccountIdAndStockItemId(accountId, stockItemId);
+        } else {
+            return "Stock Review with Account Id : " + accountId + " and StockItemId : " + stockItemId + " Does not exist";
+        }
+
+        // finally check that its gone
+
+        if(stockReviewRepo.findByAccountIdAndStockItemId(accountId, stockItemId)==null) {
+            return "Stock Review with Account Id, " + accountId + ", Stock Item:  " + stockItemId + " was deleted.";
+        } else {
+            return null;
+        }
+    }
+
+    @RequestMapping(value = "/{accountId, stockItemId}", method = RequestMethod.GET)
+    public StockReview getStockReview(  @PathVariable("accountId") int accountId,
+                                        @PathVariable("stockItemId") int stockItemId
     ) throws ParseException, JsonProcessingException {
-        return stockReviewRepo.findByStockItemIdAndAccountId( stockItemId, accountId );
+        return stockReviewRepo.findByAccountIdAndStockItemId( accountId, stockItemId );
     }
 
 

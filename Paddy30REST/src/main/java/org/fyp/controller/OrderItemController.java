@@ -43,27 +43,33 @@ public class OrderItemController extends MainController {
             throws ParseException {
 
         // check that item exists
-        if(orderItemRepo.findByOrderIdAndStockItemId(orderId, stockItemId)!=null) { // it exists
+        if( orderItemRepo.findByOrderIdAndStockItemId( orderId, stockItemId ) != null) { // it exists
             // now delete it
             orderItemRepo.deleteByOrderIdAndStockItemId(orderId, stockItemId);
         } else {
-            return "CartId : " + orderId + " and StockItemId : " + stockItemId + " Does not exist";
+            return "OrderItem of Order Id : " + orderId + " and StockItemId : " + stockItemId + " Does not exist";
         }
 
         // finally check that its gone
 
-        if(orderItemRepo.findByOrderIdAndStockItemId(orderId, stockItemId)==null) {
-            return "Cart Id, " + orderId + ", Stock Item:  " + stockItemId + " was deleted.";
+        if( orderItemRepo.findByOrderIdAndStockItemId( orderId, stockItemId ) == null) {
+            return "OrderItem of Order Id, " + orderId + ", Stock Item:  " + stockItemId + " was deleted.";
         } else {
             return null;
         }
     }
 
 
-    @RequestMapping(value = "/Order/{orderId}", method = RequestMethod.GET)
-    public Collection<OrderItem> getOrderItemsByOrderId(@PathVariable("orderId") int orderId
+    @RequestMapping(value = {"/OrderItem/{orderId}/{stockItemId}","/{orderId}/{stockItemId}"}, method = RequestMethod.GET)
+    public OrderItem getOrderItemsByOrderId(
+            @PathVariable("orderId") int orderId,
+            @PathVariable("stockItemId") int stockItemId ) {
+        return orderItemRepo.findByOrderIdAndStockItemId(orderId, stockItemId);
+    }
 
-    ) throws ParseException, JsonProcessingException {
+    @RequestMapping(value = "/Order/{orderId}", method = RequestMethod.GET)
+    public Collection<OrderItem> getOrderItemsByOrderId(@PathVariable("orderId") int orderId )
+            throws ParseException, JsonProcessingException {
         return orderItemRepo.findAllByOrderId( orderId );
     }
 }
