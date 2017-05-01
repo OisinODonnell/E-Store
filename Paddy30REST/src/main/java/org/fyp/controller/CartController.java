@@ -52,12 +52,12 @@ public class CartController extends MainController {
     }
 
     @RequestMapping(value = "/Account/{accountId}", method=RequestMethod.GET)
-    public Collection<Cart> getCartsByAccountId(int accountId) {
+    public Collection<Cart> getCartsByAccountId(@PathVariable int accountId) {
         return cartRepo.findAllByAccountId( accountId);
     }
 
     @RequestMapping(value = "/{cartId}", method=RequestMethod.GET)
-    public Cart getCartByCartId(int cartId) {
+    public Cart getCartByCartId(@PathVariable int cartId) {
         return cartRepo.findByCartId( cartId);
     }
 

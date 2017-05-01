@@ -56,7 +56,7 @@ public class OrderController extends MainController {
     }
 
     @RequestMapping(value = "/{orderId}", method=RequestMethod.GET)
-    public Order getOrderByOrderId(int orderId) {
+    public Order getOrderByOrderId(@PathVariable int orderId) {
         return orderRepo.findByOrderId( orderId);
     }
 

@@ -1,6 +1,7 @@
 package org.fyp.controller;
 
 import org.fyp.model.Session;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,7 +36,7 @@ public class SessionController extends MainController{
     }
 
     @RequestMapping(value = "/Account/{accountId}", method=RequestMethod.GET)
-    public  Collection<Session> getSessionsByAccountId(int accountId)    {
+    public  Collection<Session> getSessionsByAccountId(@PathVariable int accountId)    {
         return sessionRepo.findAllByAccountId(accountId);
     }
 }
