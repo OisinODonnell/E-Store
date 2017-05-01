@@ -43,7 +43,7 @@ public class AccountController extends MainController{
     @RequestMapping(value = "/create", method= RequestMethod.GET)
     public void create(Account account)   { accountRepo.save(account);  }
 
-    @RequestMapping(value = "/read", method=RequestMethod.GET)
+    @RequestMapping(value = {"", "/", "/read"}, method=RequestMethod.GET)
     public Collection<Account> read()
     {
         Collection<Account>  accounts = accountRepo.findAll();
@@ -63,6 +63,7 @@ public class AccountController extends MainController{
 
         return account;
     }
+
 
     @RequestMapping(value = "/update", method=RequestMethod.GET)
     public void update(Account account)

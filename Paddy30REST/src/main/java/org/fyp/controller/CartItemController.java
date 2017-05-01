@@ -24,7 +24,7 @@ public class CartItemController extends MainController {
         cartItemRepo.save(cartItem);
     }
 
-    @RequestMapping(value = "/read", method=RequestMethod.GET)
+    @RequestMapping(value = {"", "/", "/read"}, method=RequestMethod.GET)
     public Collection<CartItem> read()
     {
         return cartItemRepo.findAll();

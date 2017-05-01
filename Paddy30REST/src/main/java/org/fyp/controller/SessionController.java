@@ -19,7 +19,7 @@ public class SessionController extends MainController{
         sessionRepo.save(session);
     }
 
-    @RequestMapping(value = "/read", method=RequestMethod.GET)
+    @RequestMapping(value = {"", "/", "/read"}, method=RequestMethod.GET)
     public Collection<Session> read()    {
         return sessionRepo.findAll();
     }

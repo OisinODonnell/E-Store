@@ -29,7 +29,7 @@ public class CartController extends MainController {
         cartRepo.save(cart);
     }
 
-    @RequestMapping(value = "/read", method=RequestMethod.GET)
+    @RequestMapping(value = {"", "/", "/read"}, method=RequestMethod.GET)
     public Collection<Cart> read() throws JsonProcessingException {
 //        Collection<Cart> carts = cartRepo.findAll();
 //        String jsonInString = mapper.writeValueAsString(carts);

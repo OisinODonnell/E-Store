@@ -20,7 +20,7 @@ public class ManufacturerController extends MainController {
     @RequestMapping(value = "/create", method=RequestMethod.GET)
     public void create(Manufacturer manufacturer) { manufacturerRepo.save(manufacturer);  }
 
-    @RequestMapping(value = "/read", method=RequestMethod.GET)
+    @RequestMapping(value = {"", "/", "/read"}, method=RequestMethod.GET)
     public Collection<Manufacturer> read()
     {
         return manufacturerRepo.findAll();
@@ -37,9 +37,5 @@ public class ManufacturerController extends MainController {
         return manufacturerRepo.findByManufacturerId( manufacturerId );
     }
 
-    // Remember that when calling Manufacturers, you need to include the forward slash after
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public Collection<Manufacturer> getManufacturers() throws ParseException, JsonProcessingException {
-        return manufacturerRepo.findAll();
-    }
+
 }

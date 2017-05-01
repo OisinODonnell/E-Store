@@ -22,7 +22,7 @@ public class StockReviewController extends MainController {
         stockReviewRepo.save(stockReview);
     }
 
-    @RequestMapping(value = "/read",method=RequestMethod.GET)
+    @RequestMapping(value = {"", "/", "/read"},method=RequestMethod.GET)
     public Collection<StockReview> read()    {
         return stockReviewRepo.findAll();
     }

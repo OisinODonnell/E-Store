@@ -24,7 +24,7 @@ public class StockItemController extends MainController {
         stockItemRepo.save(stockItem);
     }
 
-    @RequestMapping(value = "/read", method=RequestMethod.GET)
+    @RequestMapping(value = {"", "/", "/read"}, method=RequestMethod.GET)
     public Collection<StockItem> read()    {
         return stockItemRepo.findAll();
     }
@@ -61,11 +61,6 @@ public class StockItemController extends MainController {
     @RequestMapping(value = "/{stockItemId}", method = RequestMethod.GET)
     public StockItem getStockItem(@PathVariable("stockItemId") int stockItemId) throws ParseException, JsonProcessingException {
         return stockItemRepo.findByStockItemId( stockItemId );
-    }
-
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public Collection<StockItem> getStockItems() throws JsonProcessingException {
-        return stockItemRepo.findAll();
     }
 
 

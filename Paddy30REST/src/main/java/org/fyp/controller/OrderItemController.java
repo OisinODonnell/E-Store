@@ -23,7 +23,7 @@ public class OrderItemController extends MainController {
         orderItemRepo.save(orderItem);
     }
 
-    @RequestMapping(value = "/read", method=RequestMethod.GET)
+    @RequestMapping(value = {"", "/", "/read"}, method=RequestMethod.GET)
     public Collection<OrderItem> read()
     {
         return orderItemRepo.findAll();
@@ -38,12 +38,6 @@ public class OrderItemController extends MainController {
     @RequestMapping(value = "/delete", method=RequestMethod.GET)
     public void delete(OrderItem orderItem)     {  orderItemRepo.delete(orderItem);    }
 
-//    @RequestMapping(value = "/Account/{accountId}", method = RequestMethod.GET)
-//    public Collection<OrderItem> getOrderItemsByAccountId(@PathVariable("accountId") int accountId
-//
-//    ) throws ParseException, JsonProcessingException {
-//        return orderItemRepo.findAllByAccountId( accountId );
-//    }
 
     @RequestMapping(value = "/Order/{orderId}", method = RequestMethod.GET)
     public Collection<OrderItem> getOrderItemsByOrderId(@PathVariable("orderId") int orderId

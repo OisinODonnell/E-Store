@@ -31,7 +31,7 @@ public class OrderController extends MainController {
         orderRepo.save(order);
     }
 
-    @RequestMapping(value = "/read", method=RequestMethod.GET)
+    @RequestMapping(value = {"", "/", "/read"}, method=RequestMethod.GET)
     public Collection<Order> read()
     {
         return orderRepo.findAll();

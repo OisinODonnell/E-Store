@@ -24,7 +24,7 @@ public class ItemCategoryController extends MainController {
         itemCategoryRepo.save(itemCategory);
     }
 
-    @RequestMapping(value = "/read", method=RequestMethod.GET)
+    @RequestMapping(value = {"", "/", "/read"}, method=RequestMethod.GET)
     public Collection<ItemCategory> read()
     {
         return itemCategoryRepo.findAll();
@@ -46,8 +46,4 @@ public class ItemCategoryController extends MainController {
     }
 
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public Collection<ItemCategory> getItemCategories() throws JsonProcessingException {
-        return itemCategoryRepo.findAll();
-    }
 }
