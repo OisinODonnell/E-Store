@@ -52,7 +52,6 @@ public class SessionController extends MainController{
         }
     }
 
-
     @RequestMapping(value = "/Account/{accountId}", method=RequestMethod.GET)
     public  Collection<Session> getSessionsByAccountId(@PathVariable int accountId)    {
         return sessionRepo.findAllByAccountId(accountId);

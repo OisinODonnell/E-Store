@@ -39,7 +39,6 @@ public class ItemCategoryController extends MainController {
     @RequestMapping(value = "/delete", method=RequestMethod.GET)
     public void delete(ItemCategory itemCategory) { itemCategoryRepo.delete(itemCategory);    }
 
-
     @RequestMapping(value = "/delete/{itemCategoryId}", method=RequestMethod.GET)
     public String deleteById(@PathVariable("itemCategoryId") int itemCategoryId) throws ParseException {
 

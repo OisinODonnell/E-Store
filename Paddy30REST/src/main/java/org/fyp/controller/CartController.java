@@ -36,7 +36,6 @@ public class CartController extends MainController {
     }
 
 
-
     @RequestMapping(value = "/update", method=RequestMethod.GET)
     public void update(Cart cart)
     {

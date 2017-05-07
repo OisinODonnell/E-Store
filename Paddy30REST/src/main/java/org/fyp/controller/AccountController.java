@@ -22,7 +22,6 @@ import java.util.Collection;
 public class AccountController extends MainController{
 
 
-
     @RequestMapping(value = "/loadData", method=RequestMethod.GET)
     public Collection<Account> loadTestData() throws Exception {
 
@@ -63,7 +62,6 @@ public class AccountController extends MainController{
 
         return account;
     }
-
 
     @RequestMapping(value = "/update", method=RequestMethod.GET)
     public void update(Account account)

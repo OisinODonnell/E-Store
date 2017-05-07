@@ -59,7 +59,6 @@ public class OrderItemController extends MainController {
         }
     }
 
-
     @RequestMapping(value = {"/OrderItem/{orderId}/{stockItemId}","/{orderId}/{stockItemId}"}, method = RequestMethod.GET)
     public OrderItem getOrderItemsByOrderId(
             @PathVariable("orderId") int orderId,

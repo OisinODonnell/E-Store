@@ -58,11 +58,10 @@ public class StockReviewController extends MainController {
 
     @RequestMapping(value = "/{accountId, stockItemId}", method = RequestMethod.GET)
     public StockReview getStockReview(  @PathVariable("accountId") int accountId,
-                                        @PathVariable("stockItemId") int stockItemId
-    ) throws ParseException, JsonProcessingException {
+                                        @PathVariable("stockItemId") int stockItemId)
+            throws ParseException, JsonProcessingException {
         return stockReviewRepo.findByAccountIdAndStockItemId( accountId, stockItemId );
     }
-
 
     @RequestMapping(value = "/StockItem/{stockItemId}", method = RequestMethod.GET)
     public Collection<StockReview> getStockReviewsByStockItemId(  @PathVariable("stockItemId") int stockItemId
