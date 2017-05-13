@@ -96,6 +96,7 @@ public class Account extends BaseEntity{
         }
     }
 
+
     @Id
     @Column(name = "account_id", nullable = false)
     @GeneratedValue(strategy=GenerationType.AUTO)
