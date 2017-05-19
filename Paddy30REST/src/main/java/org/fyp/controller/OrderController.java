@@ -1,5 +1,6 @@
 package org.fyp.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.fyp.model.Order;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,27 +18,21 @@ import java.util.Collection;
 public class OrderController extends MainController {
 
 
-    public Collection<Order> getOrders(int accountId) {
+    @RequestMapping(value = {"", "/", "/read"}, method=RequestMethod.GET)
+    public Collection<Order> read()
+    {
+        return orderRepo.findAll();
+    }
 
-        Collection<Order> orders = orderRepo.findAllByAccountId(accountId);
-
-        for(Order order:orders) {
-            order.setOrderItems( orderItemRepo.findAllByOrderId( order.getOrderId()) );
-        }
-
-        return orders;
+    @RequestMapping(value = "/{orderId}", method=RequestMethod.GET)
+    public Order getOrderByOrderId(@PathVariable int orderId) {
+        return orderRepo.findByOrderId( orderId);
     }
 
     @RequestMapping(value = "/create", method=RequestMethod.GET)
     public void create(Order order)
     {
         orderRepo.save(order);
-    }
-
-    @RequestMapping(value = {"", "/", "/read"}, method=RequestMethod.GET)
-    public Collection<Order> read()
-    {
-        return orderRepo.findAll();
     }
 
     @RequestMapping(value = "/update", method=RequestMethod.GET)
@@ -68,15 +63,11 @@ public class OrderController extends MainController {
         }
     }
 
+
     @RequestMapping(value = "/Account/{accountId}", method=RequestMethod.GET)
-    public Collection<Order> getOrdersByAccountId(@PathVariable int accountId) {
+    public Collection<Order> getOrdersByAccountId(@PathVariable int accountId)
+            throws ParseException, JsonProcessingException {
         return orderRepo.findAllByAccountId( accountId);
     }
-
-    @RequestMapping(value = "/{orderId}", method=RequestMethod.GET)
-    public Order getOrderByOrderId(@PathVariable int orderId) {
-        return orderRepo.findByOrderId( orderId);
-    }
-
 
 }

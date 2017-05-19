@@ -12,5 +12,5 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
     Account findByEmail(String email);
     Account findByPassword(String password);
 
-    Integer deleteAccountByAccountId(Integer accountId);
+    Integer deleteByAccountId(Integer accountId);
 }

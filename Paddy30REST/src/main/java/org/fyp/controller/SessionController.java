@@ -16,14 +16,14 @@ import java.util.Collection;
 @RequestMapping(value = "Sessions", method=RequestMethod.GET)
 public class SessionController extends MainController{
 
-    @RequestMapping(value = "/create", method= RequestMethod.GET)
-    public void create(Session session)    {
-        sessionRepo.save(session);
-    }
-
     @RequestMapping(value = {"", "/", "/read"}, method=RequestMethod.GET)
     public Collection<Session> read()    {
         return sessionRepo.findAll();
+    }
+
+    @RequestMapping(value = "/create", method= RequestMethod.GET)
+    public void create(Session session)    {
+        sessionRepo.save(session);
     }
 
     @RequestMapping(value = "/update", method=RequestMethod.GET)

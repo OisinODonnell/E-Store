@@ -18,15 +18,14 @@ import java.util.Collection;
 @RequestMapping(value = "/StockItems", method=RequestMethod.GET)
 public class StockItemController extends MainController {
 
+    @RequestMapping(value = {"", "/", "/read"}, method=RequestMethod.GET)
+    public Collection<StockItem> read()    {
+        return stockItemRepo.findAll();
+    }
 
     @RequestMapping(value = "/create", method= RequestMethod.GET)
     public void create(StockItem stockItem)    {
         stockItemRepo.save(stockItem);
-    }
-
-    @RequestMapping(value = {"", "/", "/read"}, method=RequestMethod.GET)
-    public Collection<StockItem> read()    {
-        return stockItemRepo.findAll();
     }
 
     @RequestMapping(value = "/update", method=RequestMethod.GET)

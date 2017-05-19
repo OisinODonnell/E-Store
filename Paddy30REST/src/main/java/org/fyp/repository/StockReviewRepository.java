@@ -11,7 +11,7 @@ import java.util.Collection;
 public interface StockReviewRepository extends JpaRepository<StockReview, Integer> {
     Collection<StockReview> findAllByAccountId(int accountId);
     Collection<StockReview> findAllByStockItemId(int stockItemId);
-    StockReview findByAccountIdAndStockItemId( int accountId, int stockItemId );
+    StockReview findByStockItemIdAndAccountId( int stockItemId, int accountId );
 
-    Integer deleteByAccountIdAndStockItemId(int accountId, int stockItemId);
+    Integer deleteByStockItemIdAndAccountId(int stockItemId, int accountId);
 }

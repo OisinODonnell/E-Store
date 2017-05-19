@@ -16,6 +16,7 @@ import java.util.Random;
  */
 public class Util {
 
+    // names and locations of data to initially populate the database
     final String BASE_PATH          = "src/main/resources/static/";
     final String ACCOUNTS           = BASE_PATH + "accounts.csv";
     final String CARTS              = BASE_PATH + "carts.csv";
