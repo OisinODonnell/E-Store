@@ -6,8 +6,9 @@ import org.fyp.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import java.sql.Timestamp;
 import java.util.List;
-
+import java.util.concurrent.Callable;
 @Controller
 public abstract class MainController {
 
@@ -33,7 +34,6 @@ public abstract class MainController {
     StockReviewRepository stockReviewRepo;
 
     ObjectMapper mapper = new ObjectMapper();
-
 
     Util util = new Util(); // singleton
 
@@ -80,7 +80,21 @@ public abstract class MainController {
                     stockReviewRepo.save( new StockReview(attributes));
                     break;
             }
+    }
 
+    // Command Pattern
+    public <T> T getRepo(Callable<T> func) throws Exception {
+
+        return func.call();
+    }
+
+    public Timestamp getTimeStamp() {
+        java.util.Date date = new java.util.Date();
+        // omit milliseconds
+        long time = 1000 * (date.getTime()/ 1000);
+        date.setTime(time);
+
+        return new java.sql.Timestamp(date.getTime());
     }
 
 }

@@ -8,7 +8,9 @@ import javax.transaction.Transactional;
 //@RepositoryRestResource(collectionResourceRel = "account", path = "Accounts")
 @Transactional
 public interface AccountRepository extends JpaRepository<Account, Integer> {
-    Account findByAccountId(int accountId);
-    Integer deleteByAccountId(int accountId);
+    Account findByAccountId(Integer accountId);
+    Account findByEmail(String email);
+    Account findByPassword(String password);
 
+    Integer deleteAccountByAccountId(Integer accountId);
 }

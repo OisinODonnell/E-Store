@@ -1,8 +1,5 @@
 package org.fyp.controller;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.fyp.model.*;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,11 +13,39 @@ import java.util.Collection;
 /**
  * Created by oisin on 30/03/2017.
  */
-
 @RestController
-@RequestMapping("Accounts")
+@RequestMapping({"Accounts","Account"})
 public class AccountController extends MainController{
 
+//    public final static String URL = "/{1}";
+
+    @RequestMapping(value = { "", "/", "/read"}, method= RequestMethod.GET)
+    public Collection<Account> read()    { return accountRepo.findAll();   }
+
+    @RequestMapping(value = "/create", method= RequestMethod.GET)
+    public void create(Account account) { accountRepo.save(account);  }
+
+    @RequestMapping(value = "/update", method=RequestMethod.GET)
+    public void update(Account account) { accountRepo.save(account);  }
+
+    @RequestMapping(value = "/delete", method=RequestMethod.GET)
+    public void delete(Account account) { accountRepo.delete(account);    }
+
+    @RequestMapping(value = "/delete/{accountId}", method=RequestMethod.GET)
+    public void delete(@PathVariable("accountId") Integer accountId)
+            throws ParseException, JsonProcessingException {
+        int status = accountRepo.deleteAccountByAccountId( accountId );
+
+    }
+
+    @RequestMapping(value = "/{accountId}", method = RequestMethod.GET)
+    public Account getAccount(  @PathVariable("accountId") int accountId) throws ParseException, JsonProcessingException {
+        return accountRepo.findByAccountId( accountId );
+    }
+    @RequestMapping(value = "/username/{email}", method = RequestMethod.GET)
+    public Account getAccount(  @PathVariable("email") String email) throws ParseException, JsonProcessingException {
+        return accountRepo.findByEmail( email );
+    }
 
     @RequestMapping(value = "/loadData", method=RequestMethod.GET)
     public Collection<Account> loadTestData() throws Exception {
@@ -38,55 +63,4 @@ public class AccountController extends MainController{
 
         return accountRepo.findAll();
     }
-
-    @RequestMapping(value = "/create", method= RequestMethod.GET)
-    public void create(Account account)   { accountRepo.save(account);  }
-
-    @RequestMapping(value = {"", "/", "/read"}, method=RequestMethod.GET)
-    public Collection<Account> read()
-    {
-        Collection<Account>  accounts = accountRepo.findAll();
-
-        return accounts;
-    }
-
-    @RequestMapping(value = "/{accountId}", method = RequestMethod.GET)
-    public Account getAccount(  @PathVariable("accountId") int accountId) throws ParseException {
-        Account account = new Account();
-
-        account = accountRepo.findByAccountId( accountId );
-//        account.setCarts( cartRepo.findAllByAccountId( accountId ));
-//        account.setOrders( orderRepo.findAllByAccountId( accountId ));
-//        account.setSessions( sessionRepo.findAllByAccountId( accountId ));
-//        account.setStockReviews( stockReviewRepo.findAllByAccountId( accountId ));
-
-        return account;
-    }
-
-    @RequestMapping(value = "/update", method=RequestMethod.GET)
-    public void update(Account account)
-    {
-        accountRepo.save(account);
-    }
-
-    @RequestMapping(value = "/delete/", method=RequestMethod.GET)
-    public void delete(Account account)     {  accountRepo.delete(account);    }
-
-    @RequestMapping(value = "/delete/{accountId}", method=RequestMethod.GET)
-    public String deleteById(@PathVariable("accountId") int accountId) throws ParseException {
-
-        if(accountRepo.findByAccountId(accountId)!=null) {
-            accountRepo.deleteByAccountId(accountId);
-        } else {
-            return "AccountID : " + accountId + " does not exist";
-        }
-
-        if(accountRepo.findByAccountId(accountId)==null) {
-            return "Account " + accountId + " was deleted.";
-        } else {
-            return null;
-        }
-    }
-
-
 }
