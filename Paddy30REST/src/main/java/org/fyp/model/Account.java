@@ -228,6 +228,7 @@ public class Account extends BaseEntity{
         return true;
     }
 
+    // hashcode is needed to create a unique reference for each item in the list.
     @Override
     public int hashCode() {
         int result = accountId;

@@ -11,7 +11,6 @@ package org.fyp;
 // the client will also have settings in this regard ... angular config object holds these settings.
 
 @Configuration
-//@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 @EnableWebMvc
 public class WebConfig extends WebMvcConfigurerAdapter {
 
