@@ -18,7 +18,7 @@ import java.util.Collection;
  */
 
 @RestController
-@RequestMapping("Accounts")
+@RequestMapping({"Accounts", "Account"})
 public class AccountController extends MainController{
 
 

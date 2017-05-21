@@ -13,7 +13,7 @@ import java.util.Collection;
  * Created by oisin on 02/04/2017.
  */
 @RestController
-@RequestMapping(value = "Sessions", method=RequestMethod.GET)
+@RequestMapping(value = {"Sessions", "Session"}, method=RequestMethod.GET)
 public class SessionController extends MainController{
 
     @RequestMapping(value = {"", "/", "/read"}, method=RequestMethod.GET)

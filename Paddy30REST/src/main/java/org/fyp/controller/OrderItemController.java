@@ -14,7 +14,7 @@ import java.util.Collection;
  * Created by oisin on 03/04/2017.
  */
 @RestController
-@RequestMapping(value = "OrderItems", method= RequestMethod.GET)
+@RequestMapping(value = {"OrderItems", "OrderItem"}, method= RequestMethod.GET)
 public class OrderItemController extends MainController {
 
     @RequestMapping(value = {"", "/", "/read"}, method=RequestMethod.GET)

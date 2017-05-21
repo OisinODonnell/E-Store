@@ -15,7 +15,7 @@ import java.util.Collection;
  */
 
 @RestController
-@RequestMapping(value = "CartItems", method= RequestMethod.GET)
+@RequestMapping(value = {"CartItems", "CartItem"}, method= RequestMethod.GET)
 public class CartItemController extends MainController {
 
     @RequestMapping(value = "/create", method=RequestMethod.GET)

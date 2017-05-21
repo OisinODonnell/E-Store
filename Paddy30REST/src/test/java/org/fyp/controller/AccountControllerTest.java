@@ -25,6 +25,7 @@
 //import org.springframework.test.web.servlet.MvcResult;
 //import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 //
+//import java.text.ParseException;
 //import java.util.ArrayList;
 //import java.util.List;
 //
@@ -50,54 +51,55 @@
 //@RunWith(MockitoJUnitRunner.class)
 //@WebMvcTest(AccountController.class)
 //public class AccountControllerTest extends MainController {
-//
 //    @MockBean
 //    private MockMvc mockMvc;
-//
 //    @InjectMocks
 //    private AccountRepository repository;
-//
 //    @Mock
 //    private Account accountStub;
-//
 //    @Test
 //    void createTest(){
 //        System.out.println("Was tested");
 //        assertTrue(true);
 //    }
-//
 //    @Test
 //    void getAccountTest()  {
 //        assertTrue(true);
 //        System.out.println("Was tested also");
+//         // prepare data and mock's behaviour
+//        List<String> attributes = new ArrayList<String>();
+//        attributes.add("2015-08-09 10:57:00");
+//        attributes.add("Sherlock Holmes");
+//        attributes.add("sholmes@gmail.com");
+//        attributes.add("0877904664");
+//        attributes.add("CUSTOMER");
+//        attributes.add("VISA");
+//        attributes.add("1");
+//        attributes.add("98");
+//        attributes.add("London");
+//        attributes.add("22B Baker Street");
+//        attributes.add("England");
+//
 //        // prepare data and mock's behaviour
-////        List<String> attributes = new ArrayList<String>();
-////        attributes.add("2015-08-09 10:57:00");
-////        attributes.add("Sherlock Holmes");
-////        attributes.add("sholmes@gmail.com");
-////        attributes.add("0877904664");
-////        attributes.add("CUSTOMER");
-////        attributes.add("VISA");
-////        attributes.add("1");
-////        attributes.add("98");
-////        attributes.add("London");
-////        attributes.add("22B Baker Street");
-////        attributes.add("England");
-////
-////        // prepare data and mock's behaviour
-////        accountStub = new Account(attributes);
-////
-////        //accountRepository.save(accountStub);
-////        when(repository.findByAccountId(any(Integer.class))).thenReturn(accountStub);
-////
-////
-////        //execute
-////        MvcResult result = mockMvc
-////                .perform(MockMvcRequestBuilders.get("/Accounts/" + "{accountId}")
-////                        .accept(MediaType.APPLICATION_JSON_UTF8))
-////                        .andReturn();
-////
-////
+//        try {
+//            accountStub = new Account(attributes);
+//        } catch (AttributeCountException e) {
+//            e.printStackTrace();
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//
+//        //accountRepository.save(accountStub);
+//        when(repository.findByAccountId(any(Integer.class))).thenReturn(accountStub);
+//
+//
+//        //execute
+//        MvcResult result = mockMvc
+//                .perform(MockMvcRequestBuilders.get("/Accounts/" + "{accountId}")
+//                        .accept(MediaType.APPLICATION_JSON_UTF8))
+//                        .andReturn();
+//
+//
 //
 //    }
 //}

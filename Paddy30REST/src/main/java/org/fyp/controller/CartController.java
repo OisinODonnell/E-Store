@@ -17,7 +17,7 @@ import java.util.Collection;
 
 
 @RestController
-@RequestMapping(value = "Carts", method=RequestMethod.GET)
+@RequestMapping(value = {"Carts", "Cart"}, method=RequestMethod.GET)
 public class CartController extends MainController {
 
 

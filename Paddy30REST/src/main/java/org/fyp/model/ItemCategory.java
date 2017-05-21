@@ -1,5 +1,6 @@
 package org.fyp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.fyp.controller.AttributeCountException;
 
@@ -16,7 +17,7 @@ import java.util.List;
 public class ItemCategory extends BaseEntity{
     private int itemCategoryId;
     private String type;
-    @JsonManagedReference
+    @JsonBackReference
     private Collection<StockItem> stockItems;
 
     public ItemCategory() {

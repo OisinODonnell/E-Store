@@ -1,6 +1,7 @@
 package org.fyp.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.fyp.controller.AttributeCountException;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -25,11 +26,11 @@ public class StockItem extends BaseEntity{
     private BigDecimal price;
     private int manufacturerId;
     private int itemCategoryId;
-    @JsonBackReference
+    @JsonManagedReference
     private Manufacturer manufacturer;
-    @JsonBackReference
+    @JsonManagedReference
     private ItemCategory itemCategory;
-    @JsonBackReference
+    @JsonManagedReference
     private Collection<StockReview> stockReviews;
 
     public StockItem() {

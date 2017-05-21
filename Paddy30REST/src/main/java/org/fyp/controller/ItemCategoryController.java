@@ -15,7 +15,7 @@ import java.util.Collection;
  * Created by oisin on 03/04/2017.
  */
 @RestController
-@RequestMapping(value = "ItemCategories", method= RequestMethod.GET)
+@RequestMapping(value = {"ItemCategories", "ItemCategory"}, method= RequestMethod.GET)
 public class ItemCategoryController extends MainController {
 
     @RequestMapping(value = "/create", method=RequestMethod.GET)

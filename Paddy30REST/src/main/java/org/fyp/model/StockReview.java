@@ -21,9 +21,9 @@ public class StockReview extends BaseEntity{
     private String rating;
     private String comment;
     private Timestamp date;
-    @JsonManagedReference
+    @JsonBackReference
     private StockItem stockItem;
-    @JsonManagedReference
+    @JsonBackReference
     private Account account;
 
     public StockReview() throws ParseException {

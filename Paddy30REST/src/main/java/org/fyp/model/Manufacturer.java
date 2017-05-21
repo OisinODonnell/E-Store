@@ -1,5 +1,6 @@
 package org.fyp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.fyp.controller.AttributeCountException;
 
@@ -18,7 +19,7 @@ public class Manufacturer extends BaseEntity {
     private String contactName;
     private String contactPhone;
     private String contactEmail;
-    @JsonManagedReference
+    @JsonBackReference
     private Collection<StockItem> stockItems;
 
     public Manufacturer() {

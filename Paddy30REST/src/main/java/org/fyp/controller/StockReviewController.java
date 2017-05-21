@@ -14,7 +14,7 @@ import java.util.Collection;
  * Created by oisin on 03/04/2017.
  */
 @RestController
-@RequestMapping(value = "StockReviews", method=RequestMethod.GET)
+@RequestMapping(value = {"StockReviews", "StockReview"}, method=RequestMethod.GET)
 public class StockReviewController extends MainController {
 
     @RequestMapping(value = {"", "/", "/read"},method=RequestMethod.GET)

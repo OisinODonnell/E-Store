@@ -108,9 +108,9 @@ public class LoginController extends MainController {
     @RequestMapping(value = "/register/{name}/{email}/{password}/{accountType}",
             method= RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<HashMap<String,String>> register (@PathVariable("name") String name,
-                                                            @PathVariable("email")          String email,
-                                                            @PathVariable("password")       String password,
+    public ResponseEntity<HashMap<String,String>> register (@PathVariable("name")         String name,
+                                                            @PathVariable("email")        String email,
+                                                            @PathVariable("password")     String password,
                                                             @PathVariable("accountType")  String accountType )
             throws ParseException {
         // Check email is unique

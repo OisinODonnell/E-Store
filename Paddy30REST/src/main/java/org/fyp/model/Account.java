@@ -1,6 +1,7 @@
 package org.fyp.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.fyp.controller.AttributeCountException;
 import org.fyp.repository.CartRepository;
 import org.fyp.repository.OrderRepository;
@@ -51,7 +52,7 @@ public class Account extends BaseEntity{
     private Collection<Order> orders;
     @JsonBackReference
     private Collection<Session> sessions;
-    @JsonBackReference
+    @JsonManagedReference
     private Collection<StockReview> stockReviews;
 
     public Account() throws ParseException {

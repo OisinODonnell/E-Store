@@ -14,7 +14,7 @@ import java.util.Collection;
  * Created by oisin on 03/04/2017.
  */
 @RestController
-@RequestMapping(value = "Manufacturers", method= RequestMethod.GET)
+@RequestMapping(value = {"Manufacturers", "Manufacturer"}, method= RequestMethod.GET)
 public class ManufacturerController extends MainController {
 
     @RequestMapping(value = "/create", method=RequestMethod.GET)

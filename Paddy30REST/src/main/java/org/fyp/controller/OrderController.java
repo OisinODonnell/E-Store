@@ -14,7 +14,7 @@ import java.util.Collection;
  * Created by oisin on 30/03/2017.
  */
 @RestController
-@RequestMapping(value = "Orders", method= RequestMethod.GET)
+@RequestMapping(value = {"Orders", "Order"}, method= RequestMethod.GET)
 public class OrderController extends MainController {
 
 
