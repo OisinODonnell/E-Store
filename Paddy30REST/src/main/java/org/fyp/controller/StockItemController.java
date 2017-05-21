@@ -3,6 +3,7 @@ package org.fyp.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.fyp.model.Account;
 import org.fyp.model.StockItem;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -89,5 +90,36 @@ public class StockItemController extends MainController {
         }
 
         return stockItems;
+    }
+
+    @RequestMapping(value = "/{stockItemId}/{newStockQty}", method = RequestMethod.GET)
+    public ResponseEntity<HashMap<String,String>> setNewStockLevel(
+            @PathVariable("stockItemId") Integer stockItemId,
+            @PathVariable("newStockQty") Integer newStockQty)
+
+            throws ParseException, JsonProcessingException {
+
+        respMap = new HashMap<>();
+
+        // retrieve the stockItem and extract the current stock level
+        StockItem stockItem = stockItemRepo.findByStockItemId(stockItemId);
+        int newStockLevel = stockItem.getStockLevel() + newStockQty;
+        stockItem.setStockLevel(newStockLevel);
+
+        // save the changes
+        stockItemRepo.save(stockItem);
+
+        // check that stock was updated
+
+        if (stockItemRepo.findByStockItemId(stockItemId).getStockLevel() == newStockLevel) {
+
+            respMap.put("success", "1");
+            respMap.put("message", "StockItemId [" + stockItemId + "] Stock level updated by [" + newStockQty + "]");
+        } else {
+
+            respMap.put("success", "0");
+            respMap.put("message", "StockItemId [" + stockItemId + "] could not be updated");
+        }
+        return new ResponseEntity<>(respMap, httpStatus);
     }
 }

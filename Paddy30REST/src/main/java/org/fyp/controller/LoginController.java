@@ -19,7 +19,6 @@ import java.util.HashMap;
 public class LoginController extends MainController {
 
     int status = 0;
-    HttpStatus httpStatus = HttpStatus.OK;
     String message = "";
     HashMap<String, String> respMap;
 

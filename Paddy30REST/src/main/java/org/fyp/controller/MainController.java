@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.fyp.model.*;
 import org.fyp.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 
 import java.sql.Timestamp;
@@ -35,6 +36,10 @@ public abstract class MainController {
     StockReviewRepository stockReviewRepo;
 
     ObjectMapper mapper = new ObjectMapper();
+
+    // this was used by a number of controllers so was refactored up.
+    // Sets default response to client.
+    HttpStatus httpStatus = HttpStatus.OK;
 
     Util util = new Util(); // singleton
 
