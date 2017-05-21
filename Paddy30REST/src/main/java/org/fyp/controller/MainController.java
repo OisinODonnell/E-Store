@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.Callable;
 @Controller
@@ -36,6 +37,9 @@ public abstract class MainController {
     ObjectMapper mapper = new ObjectMapper();
 
     Util util = new Util(); // singleton
+
+    // response object for building up a response to the user
+    HashMap<String, String> respMap = new HashMap<>();
 
     @SuppressWarnings("unchecked")
     public <E> void loadData(E item, String file) throws Exception {

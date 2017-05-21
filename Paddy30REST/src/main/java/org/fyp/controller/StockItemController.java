@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * Created by oisin on 30/03/2017.
@@ -59,4 +61,33 @@ public class StockItemController extends MainController {
     }
 
 
+    @RequestMapping(value = "/Search/{manufacturerId}/{itemCategoryId}/{titleLike}", method = RequestMethod.GET)
+    public ArrayList<StockItem> getStockSearch(@PathVariable("manufacturerId") Integer manufacturerId,
+                                               @PathVariable("itemCategoryId")Integer itemCategoryId,
+                                               @PathVariable("titleLike")     String  titleLike)
+            throws ParseException, JsonProcessingException {
+
+        respMap = new HashMap<>();
+
+        ArrayList<StockItem> stockItems = new ArrayList<>();
+
+        // case no manufacturer ot itemcategory
+        if ((manufacturerId == 0) && (itemCategoryId == 0)) {
+            stockItems =  stockItemRepo.findAllByTitleLikeIgnoreCase( "%"+titleLike+"%");
+        }
+        // case no itemcategory
+        if ((manufacturerId == 0) && (itemCategoryId > 0)) {
+            stockItems =  stockItemRepo.findByItemCategoryIdAndTitleLikeIgnoreCase( itemCategoryId, "%"+titleLike+"%");
+        }
+        // case no manufacturer
+        if ((manufacturerId > 0) && (itemCategoryId == 0)) {
+            stockItems =  stockItemRepo.findByManufacturerIdAndTitleLikeIgnoreCase( manufacturerId, "%"+titleLike+"%");
+        }
+        // all parameters entered
+        if ((manufacturerId > 0) && (itemCategoryId > 0)) {
+            stockItems =  stockItemRepo.findByManufacturerIdAndItemCategoryIdAndTitleLikeIgnoreCase( manufacturerId, itemCategoryId, "%"+titleLike+"%");
+        }
+
+        return stockItems;
+    }
 }
