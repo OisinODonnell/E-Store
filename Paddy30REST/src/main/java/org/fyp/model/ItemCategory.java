@@ -1,7 +1,6 @@
 package org.fyp.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.fyp.controller.AttributeCountException;
 
 import javax.persistence.*;

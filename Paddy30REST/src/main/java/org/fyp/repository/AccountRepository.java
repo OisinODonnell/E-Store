@@ -10,7 +10,5 @@ import javax.transaction.Transactional;
 public interface AccountRepository extends JpaRepository<Account, Integer> {
     Account findByAccountId(Integer accountId);
     Account findByEmail(String email);
-    Account findByPassword(String password);
-
-    Integer deleteByAccountId(Integer accountId);
+    Integer deleteAccountByAccountId(Integer accountId);
 }

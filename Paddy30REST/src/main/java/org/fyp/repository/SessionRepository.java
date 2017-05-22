@@ -11,6 +11,4 @@ import java.util.Collection;
 @Transactional
 public interface SessionRepository extends JpaRepository<Session, Integer> {
     Collection<Session> findAllByAccountId(int accountId);
-    Session findBySessionId(int sessionId);
-    Integer deleteBySessionId(int sessionId);
 }

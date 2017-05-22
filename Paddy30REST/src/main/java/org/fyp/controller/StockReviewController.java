@@ -14,14 +14,15 @@ import java.util.Collection;
  * Created by oisin on 03/04/2017.
  */
 @RestController
-@RequestMapping(value = {"StockReviews", "StockReview"}, method=RequestMethod.GET)
+@RequestMapping(value = {"StockReviews","StockReview"} , method=RequestMethod.GET)
 public class StockReviewController extends MainController {
 
-    @RequestMapping(value = {"", "/", "/read"},method=RequestMethod.GET)
+    @RequestMapping(value = { "", "/", "/read" },method=RequestMethod.GET)
     public Collection<StockReview> read()    {
         return stockReviewRepo.findAll();
     }
 
+    // crud operations
     @RequestMapping(value = "/create",method=RequestMethod.GET)
     public void create(StockReview stockReview)    {
         stockReviewRepo.save(stockReview);
@@ -36,29 +37,7 @@ public class StockReviewController extends MainController {
         stockReviewRepo.delete(stockReview);
     }
 
-    @RequestMapping(value = "/delete/{accountId}/{stockItemId}", method=RequestMethod.GET)
-    public String deleteById(@PathVariable("accountId") int accountId, @PathVariable("stockItemId") int stockItemId)
-            throws ParseException {
-
-        // check that item exists
-        if(stockReviewRepo.findByStockItemIdAndAccountId(stockItemId, accountId)!=null) { // it exists
-            // now delete it
-            stockReviewRepo.deleteByStockItemIdAndAccountId(stockItemId, accountId);
-        } else {
-            return "Stock Review with Account Id : " + accountId + " and StockItemId : " + stockItemId + " Does not exist";
-        }
-
-        // finally check that its gone
-
-        if(stockReviewRepo.findByStockItemIdAndAccountId(stockItemId, accountId)==null) {
-            return "Stock Review with Account Id, " + accountId + ", Stock Item:  " + stockItemId + " was deleted.";
-        } else {
-            return null;
-        }
-    }
-
-
-    //  not sure if this syntax is correct ... some testing needed
+    // not sure if this syntax is correct ... some testing needed
     @RequestMapping(value = "/{stockItemId, accountId}", method = RequestMethod.GET)
     public StockReview getStockReview(  @PathVariable("stockItemId") int stockItemId,
                                         @PathVariable("accountId") int accountId
@@ -78,6 +57,10 @@ public class StockReviewController extends MainController {
 
     ) throws ParseException, JsonProcessingException {
         return stockReviewRepo.findAllByAccountId( accountId );
-
     }
+
+
+
+
+
 }

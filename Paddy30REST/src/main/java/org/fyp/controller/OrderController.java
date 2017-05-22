@@ -2,10 +2,7 @@ package org.fyp.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.fyp.model.Order;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.util.Collection;
@@ -14,18 +11,14 @@ import java.util.Collection;
  * Created by oisin on 30/03/2017.
  */
 @RestController
-@RequestMapping(value = {"Orders", "Order"}, method= RequestMethod.GET)
+@RequestMapping(value = {"Orders","Order"}, method= RequestMethod.GET)
 public class OrderController extends MainController {
 
-
-    @RequestMapping(value = {"", "/", "/read"}, method=RequestMethod.GET)
-    public Collection<Order> read()
-    {
-        return orderRepo.findAll();
-    }
+    @RequestMapping(value = {"", "/", "read" } , method=RequestMethod.GET)
+    public Collection<Order> read() { return orderRepo.findAll();  }
 
     @RequestMapping(value = "/{orderId}", method=RequestMethod.GET)
-    public Order getOrderByOrderId(@PathVariable int orderId) {
+    public Order getOrderByOrderId(Integer orderId) {
         return orderRepo.findByOrderId( orderId);
     }
 
@@ -47,27 +40,13 @@ public class OrderController extends MainController {
         orderRepo.delete(order);
     }
 
-    @RequestMapping(value = "/delete/{orderId}", method=RequestMethod.GET)
-    public String deleteById(@PathVariable("orderId") int orderId) throws ParseException {
-
-        if(orderRepo.findByOrderId(orderId)!=null) {
-            orderRepo.deleteByOrderId(orderId);
-        } else {
-            return "OrderID : " + orderId + " does not exist";
-        }
-
-        if(orderRepo.findByOrderId(orderId)==null) {
-            return "OrderID : " + orderId + " was deleted.";
-        } else {
-            return null;
-        }
-    }
-
 
     @RequestMapping(value = "/Account/{accountId}", method=RequestMethod.GET)
-    public Collection<Order> getOrdersByAccountId(@PathVariable int accountId)
+    public Collection<Order> getOrdersByAccountId( @PathVariable("accountId") int accountId)
             throws ParseException, JsonProcessingException {
         return orderRepo.findAllByAccountId( accountId);
     }
+
+
 
 }

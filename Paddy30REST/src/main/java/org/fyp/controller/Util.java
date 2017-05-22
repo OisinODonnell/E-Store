@@ -14,21 +14,10 @@ import java.util.Random;
 /**
  * Created by oisin on 30/03/2017.
  */
+
+
 public class Util {
-    // Singleton Pattern Used here.
-    private static Util instance = null;
 
-    // private constructor to avoid client applications to use constructor
-    protected Util(){}
-
-    public static Util getInstance() {
-        if(instance == null) {
-            instance = new Util();
-        }
-        return instance;
-    }
-
-    // names and locations of data to initially populate the database
     final String BASE_PATH          = "src/main/resources/static/";
     final String ACCOUNTS           = BASE_PATH + "accounts.csv";
     final String CARTS              = BASE_PATH + "carts.csv";

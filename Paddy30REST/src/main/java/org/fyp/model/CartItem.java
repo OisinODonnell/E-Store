@@ -1,5 +1,6 @@
 package org.fyp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.fyp.controller.AttributeCountException;
 
@@ -19,19 +20,19 @@ public class CartItem extends BaseEntity{
     private int stockItemId;
     private Integer quantity;
     private BigDecimal unitPrice;
-    @JsonManagedReference
+    @JsonBackReference
     private Cart cart;
     @JsonManagedReference
     private StockItem stockItem;
 
     public CartItem() throws ParseException {
 
-        cartId = 0;
+        cartId      = 0;
         stockItemId = 0;
-        unitPrice = new BigDecimal(0.0);
-        quantity = 0;
-        stockItem = new StockItem();
-        cart = new Cart();
+        unitPrice   = new BigDecimal(0.0);
+        quantity    = 0;
+        stockItem   = new StockItem();
+        cart        = new Cart();
 
     }
 

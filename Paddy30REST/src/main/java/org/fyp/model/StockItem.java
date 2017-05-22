@@ -1,6 +1,5 @@
 package org.fyp.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.fyp.controller.AttributeCountException;
 import org.hibernate.annotations.Fetch;
@@ -46,6 +45,7 @@ public class StockItem extends BaseEntity{
         stockReviews = new ArrayList<>();
 
     }
+
 
     public StockItem(List<String> attributes) throws AttributeCountException {
 
@@ -177,7 +177,7 @@ public class StockItem extends BaseEntity{
         this.itemCategory = itemCategory;
     }
 
-    @OneToMany(mappedBy = "stockItem", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
+    @OneToMany(mappedBy = "stockItem", fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
     @Fetch(value = FetchMode.SUBSELECT)
     public Collection<StockReview> getStockReviews() {
         return stockReviews;

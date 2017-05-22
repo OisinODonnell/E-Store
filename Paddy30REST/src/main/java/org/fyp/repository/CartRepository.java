@@ -9,8 +9,7 @@ import java.util.Collection;
 //@RepositoryRestResource(collectionResourceRel = "cart", path = "Carts")
 @Transactional
 public interface CartRepository extends JpaRepository<Cart,Integer> {
-    Collection<Cart> findAllByAccountId(int accountId);
-    Cart findByCartId(int cartId);
-    Integer deleteByCartId(int cartId);
+    Collection<Cart> findAllByAccountId(Integer accountId);
+    Cart findByCartId(Integer cartId);
 }
 

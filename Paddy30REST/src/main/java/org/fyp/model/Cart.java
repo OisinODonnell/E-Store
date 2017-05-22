@@ -3,8 +3,6 @@ package org.fyp.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.fyp.controller.AttributeCountException;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -24,11 +22,8 @@ public class Cart extends BaseEntity{
     private int accountId;
     private Timestamp date;
     private BigDecimal total;
-    @JsonBackReference
+    @JsonManagedReference
     private Collection<CartItem> cartItems;
-    // This is Jackson annotation added to manage bidirectional relationships
-    // to avoid the problem of infinite recursion. (Account calling Cart, then Cart
-    // calling the same account. As is @JsonBackReference.
     @JsonManagedReference
     private Account account;
 
@@ -116,8 +111,7 @@ public class Cart extends BaseEntity{
         return result;
     }
 
-    @OneToMany(mappedBy = "cart", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
-    //@Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "cart", fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
     public Collection<CartItem> getCartItems() {
         return cartItems;
     }

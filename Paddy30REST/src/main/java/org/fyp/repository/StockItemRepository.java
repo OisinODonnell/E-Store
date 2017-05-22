@@ -1,18 +1,15 @@
 package org.fyp.repository;
 
-        import org.fyp.model.StockItem;
-        import org.springframework.data.jpa.repository.JpaRepository;
+import org.fyp.model.StockItem;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-        import javax.transaction.Transactional;
-        import java.util.ArrayList;
-        import java.util.Collection;
+import javax.transaction.Transactional;
+import java.util.ArrayList;
 
-
-//@RepositoryRestResource(collectionResourceRel = "stockItem", path = "StockItems")
 @Transactional
 public interface StockItemRepository extends JpaRepository<StockItem, Integer> {
-
-    StockItem findByStockItemId(Integer stockItemId);
+    ArrayList<StockItem> findAll();
+    StockItem findByStockItemId(int stockItemId);
 
     // product search methods
     ArrayList<StockItem> findAllByItemCategoryId(int itemCategoryId);
@@ -22,6 +19,4 @@ public interface StockItemRepository extends JpaRepository<StockItem, Integer> {
     ArrayList<StockItem> findAllByTitleLikeIgnoreCase(String titleLike);
     ArrayList<StockItem> findByItemCategoryIdAndTitleLikeIgnoreCase( Integer itemCategoryId, String titleLike);
     ArrayList<StockItem> findByManufacturerIdAndTitleLikeIgnoreCase( Integer manufacturerId, String titleLike);
-
-    Integer deleteByStockItemId(int stockItemId);
 }

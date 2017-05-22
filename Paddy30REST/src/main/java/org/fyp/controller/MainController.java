@@ -36,9 +36,6 @@ public abstract class MainController {
     StockReviewRepository stockReviewRepo;
 
     ObjectMapper mapper = new ObjectMapper();
-
-    // this was used by a number of controllers so was refactored up.
-    // Sets default response to client.
     HttpStatus httpStatus = HttpStatus.OK;
 
     Util util = new Util(); // singleton
@@ -105,5 +102,8 @@ public abstract class MainController {
 
         return new java.sql.Timestamp(date.getTime());
     }
+
+
+
 
 }

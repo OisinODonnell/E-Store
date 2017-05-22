@@ -1,6 +1,5 @@
 package org.fyp.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.fyp.controller.AttributeCountException;
 import org.hibernate.annotations.Fetch;
@@ -24,7 +23,7 @@ public class Order extends BaseEntity{
     private Timestamp date;
     private int accountId;
     private BigDecimal total;
-    @JsonBackReference
+    @JsonManagedReference
     private Collection<OrderItem> orderItems;
     @JsonManagedReference
     private Account account;
@@ -112,7 +111,7 @@ public class Order extends BaseEntity{
         return result;
     }
 
-    @OneToMany(mappedBy = "order", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
+    @OneToMany(mappedBy = "order", fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
     @Fetch(value = FetchMode.SUBSELECT)
     public Collection<OrderItem> getOrderItems() {
         return orderItems;

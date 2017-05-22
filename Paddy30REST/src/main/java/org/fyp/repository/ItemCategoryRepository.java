@@ -9,6 +9,5 @@ import javax.transaction.Transactional;
 @RepositoryRestResource(collectionResourceRel = "itemCategory", path = "ItemCategories")
 @Transactional
 public interface ItemCategoryRepository extends JpaRepository<ItemCategory, Integer> {
-    ItemCategory findByItemCategoryId(Integer itemCategoryId);
-    Integer deleteByItemCategoryId(Integer itemCategoryId);
+    ItemCategory findByItemCategoryId(int itemCategoryId);
 }

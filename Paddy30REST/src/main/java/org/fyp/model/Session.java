@@ -27,7 +27,7 @@ public class Session extends BaseEntity {
         accountId = 0;
         dateStart = toTimestamp("2017-01-01 01:01");
         dateEnd = toTimestamp("2017-01-01 01:01");
-        account = new Account();
+        account = null;
     }
 
     public Session(List<String> attributes) throws AttributeCountException, ParseException {

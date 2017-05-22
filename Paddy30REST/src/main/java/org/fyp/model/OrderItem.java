@@ -20,7 +20,7 @@ public class OrderItem extends BaseEntity{
     private int stockItemId;
     private int quantity;
     private BigDecimal unitPrice;
-    @JsonManagedReference
+    @JsonBackReference
     private Order order;
     @JsonManagedReference
     private StockItem stockItem;

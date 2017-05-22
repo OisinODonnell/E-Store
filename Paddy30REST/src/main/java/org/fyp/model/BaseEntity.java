@@ -49,4 +49,7 @@ public abstract class BaseEntity {
         Date parsedDate = dateFormat.parse(value);
         return  new Timestamp(parsedDate.getTime());
     }
+
+
+
 }

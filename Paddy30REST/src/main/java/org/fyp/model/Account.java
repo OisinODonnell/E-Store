@@ -43,9 +43,6 @@ public class Account extends BaseEntity{
     private String addressStreet;
     private String addressCity;
     private String addressCountry;
-    // This is Jackson annotation added to manage bidirectional relationships
-    // to avoid the problem of infinite recursion. (Account calling Cart, then Cart
-    // calling the same account.
     @JsonBackReference
     private Collection<Cart> carts;
     @JsonBackReference
@@ -96,7 +93,6 @@ public class Account extends BaseEntity{
             throw new AttributeCountException();
         }
     }
-
 
     @Id
     @Column(name = "account_id", nullable = false)
@@ -229,7 +225,6 @@ public class Account extends BaseEntity{
         return true;
     }
 
-    // hashcode is needed to create a unique reference for each item in the list.
     @Override
     public int hashCode() {
         int result = accountId;
@@ -247,8 +242,7 @@ public class Account extends BaseEntity{
         return result;
     }
 
-    @OneToMany(mappedBy = "account", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
-    //@Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "account", fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
     public Collection<Cart> getCarts() {
         return carts;
     }
@@ -256,8 +250,7 @@ public class Account extends BaseEntity{
         this.carts = carts;
     }
 
-    @OneToMany(mappedBy = "account", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
-    //@Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "account", fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
     public Collection<Order> getOrders()     {
         return orders;
     }
@@ -265,8 +258,7 @@ public class Account extends BaseEntity{
         this.orders = orders;
     }
 
-    @OneToMany(mappedBy = "account", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
-    //@Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "account", fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
     public Collection<Session> getSessions() {
         return sessions;
     }
@@ -275,8 +267,7 @@ public class Account extends BaseEntity{
         this.sessions = sessions;
     }
 
-    @OneToMany(mappedBy = "account", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
-    //@Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "account", fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
     public Collection<StockReview> getStockReviews() {
         return stockReviews;
     }

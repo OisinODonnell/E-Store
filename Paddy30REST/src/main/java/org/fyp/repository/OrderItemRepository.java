@@ -11,6 +11,4 @@ import java.util.Collection;
 @Transactional
 public interface OrderItemRepository extends JpaRepository<OrderItem, Integer> {
     Collection<OrderItem> findAllByOrderId(int orderId);
-    OrderItem findByOrderIdAndStockItemId(int orderId, int stockItemId);
-    Integer deleteByOrderIdAndStockItemId(int orderId, int stockItemId);
 }

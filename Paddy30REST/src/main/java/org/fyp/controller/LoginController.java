@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.Collection;
@@ -20,12 +21,12 @@ public class LoginController extends MainController {
 
     int status = 0;
     String message = "";
-    HashMap<String, String> respMap;
+
 
     @RequestMapping(value = "/{username}/{password}", method= RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<HashMap<String,String>> login (@PathVariable("username") String username,
-                                                         @PathVariable("password") String password) throws ParseException {
+                                 @PathVariable("password") String password) throws ParseException {
         // check username exists
         // check password matches
         // create session with accountid, date and time
@@ -107,9 +108,9 @@ public class LoginController extends MainController {
     @RequestMapping(value = "/register/{name}/{email}/{password}/{accountType}",
             method= RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<HashMap<String,String>> register (@PathVariable("name")         String name,
-                                                            @PathVariable("email")        String email,
-                                                            @PathVariable("password")     String password,
+    public ResponseEntity<HashMap<String,String>> register (@PathVariable("name") String name,
+                                                            @PathVariable("email")          String email,
+                                                            @PathVariable("password")       String password,
                                                             @PathVariable("accountType")  String accountType )
             throws ParseException {
         // Check email is unique
@@ -137,16 +138,19 @@ public class LoginController extends MainController {
                 respMap.put("message","Account created successfully");
                 respMap.put("httpStatus",""+httpStatus);
                 respMap.put("success","1");
+
                 accountRepo.save(account);
 
             } else {
                 httpStatus = HttpStatus.OK;
+
                 respMap.put("message","Password Incorrect: >= 6 and <= 20, at least one number, upper and lowercase character");
                 respMap.put("success","0");
                 respMap.put("httpStatus",""+httpStatus);
             }
         } else {
             httpStatus = HttpStatus.OK;
+
             respMap.put("message"," - This email address is already in use, please chose another email address");
             respMap.put("success","0");
             respMap.put("httpStatus",""+httpStatus);
@@ -155,19 +159,19 @@ public class LoginController extends MainController {
         return new ResponseEntity<>(respMap, httpStatus);
     }
     @RequestMapping(value = "/register/{name}/{email}/{password}/{accountType}/{phone}/{loyaltyCard}/{addressStreet}/{addressCity}/{addressCountry}/{paymentType}",
-            method= RequestMethod.GET)
+                    method= RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<HashMap<String,String>> register (@PathVariable("name")           String name,
                                                             @PathVariable("email")          String email,
                                                             @PathVariable("password")       String password,
-                                                            @PathVariable("phone")          String phone,
                                                             @PathVariable("accountType")    String accountType,
+                                                            @PathVariable("phone")          String phone,
                                                             @PathVariable("loyaltyCard")    Integer loyaltyCard,
                                                             @PathVariable("addressStreet")  String addressStreet,
                                                             @PathVariable("addressCity")    String addressCity,
                                                             @PathVariable("addressCountry") String addressCountry,
                                                             @PathVariable("paymentType")    String paymentType  )
-            throws ParseException {
+                                    throws ParseException {
         // Check email is unique
         // check password conforms to correct format
         // create account
@@ -220,6 +224,7 @@ public class LoginController extends MainController {
 
         return new ResponseEntity<>(respMap, httpStatus);
     }
+
     private boolean checkPasswordFormat(String password) {
 
         //  ^            #   match from start
@@ -234,4 +239,5 @@ public class LoginController extends MainController {
 
         return password.matches(regex);
     }
+
 }

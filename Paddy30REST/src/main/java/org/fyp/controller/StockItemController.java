@@ -1,7 +1,6 @@
 package org.fyp.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.fyp.model.Account;
 import org.fyp.model.StockItem;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 
 /**
@@ -21,10 +19,11 @@ import java.util.HashMap;
 @RequestMapping(value = {"StockItems","StockItem"}, method=RequestMethod.GET)
 public class StockItemController extends MainController {
 
-    @RequestMapping(value = {"", "/", "/read"}, method=RequestMethod.GET)
-    public Collection<StockItem> read()    {
+    @RequestMapping(value = { "", "/", "/read"}, method= RequestMethod.GET)
+    public ArrayList<StockItem> read()    {
         return stockItemRepo.findAll();
     }
+
 
     @RequestMapping(value = "/create", method= RequestMethod.GET)
     public void create(StockItem stockItem)    {
@@ -36,39 +35,42 @@ public class StockItemController extends MainController {
         stockItemRepo.save(stockItem);
     }
 
-    // You cannot delete a StockItem. Not designed for that.
+    @RequestMapping(value = "/delete", method=RequestMethod.GET)
+    public void delete(StockItem stockItem)    {
+        stockItemRepo.delete(stockItem);
+    }
+
+    @RequestMapping(value = "/{stockItemId}", method = RequestMethod.GET)
+    public StockItem getStockItemById(@PathVariable("stockItemId") int stockItemId)
+            throws ParseException, JsonProcessingException {
+        return stockItemRepo.findByStockItemId( stockItemId );
+    }
 
     @RequestMapping(value = "/Manufacturer/{manufacturerId}", method = RequestMethod.GET)
-    public Collection<StockItem> getStockItemByManufacturerId(@PathVariable("manufacturerId") int manufacturerId)
+    public ArrayList<StockItem> getStockItemByManufacturerId(@PathVariable("manufacturerId") int manufacturerId)
             throws ParseException, JsonProcessingException {
         return stockItemRepo.findAllByManufacturerId( manufacturerId );
     }
 
     @RequestMapping(value = "/ItemCategory/{itemCategoryId}", method = RequestMethod.GET)
-    public Collection<StockItem> getStockItemByItemCategoryId(@PathVariable("itemCategoryId") int itemCategoryId)
+    public ArrayList<StockItem> getStockItemByItemCategoryId(@PathVariable("itemCategoryId") int itemCategoryId)
             throws ParseException, JsonProcessingException {
         return stockItemRepo.findAllByItemCategoryId( itemCategoryId );
     }
 
     @RequestMapping(value = "/Like/{titleLike}", method = RequestMethod.GET)
-    public Collection<StockItem> getStockItem(@PathVariable("titleLike") String titleLike)
+    public ArrayList<StockItem> getStockItem(@PathVariable("titleLike") String titleLike)
             throws ParseException, JsonProcessingException {
-        return stockItemRepo.findByTitleLikeIgnoreCase( "%" + titleLike + "%" );
+        return stockItemRepo.findByTitleLikeIgnoreCase( "%"+titleLike+"%" );
     }
-
-    @RequestMapping(value = "/{stockItemId}", method = RequestMethod.GET)
-    public StockItem getStockItem(@PathVariable("stockItemId") int stockItemId) throws ParseException, JsonProcessingException {
-        return stockItemRepo.findByStockItemId( stockItemId );
-    }
-
 
     @RequestMapping(value = "/Search/{manufacturerId}/{itemCategoryId}/{titleLike}", method = RequestMethod.GET)
     public ArrayList<StockItem> getStockSearch(@PathVariable("manufacturerId") Integer manufacturerId,
-                                               @PathVariable("itemCategoryId")Integer itemCategoryId,
-                                               @PathVariable("titleLike")     String  titleLike)
-            throws ParseException, JsonProcessingException {
+                                                @PathVariable("itemCategoryId")Integer itemCategoryId,
+                                                @PathVariable("titleLike")     String  titleLike)
+                        throws ParseException, JsonProcessingException {
 
-        respMap = new HashMap<>();
+
 
         ArrayList<StockItem> stockItems = new ArrayList<>();
 
@@ -101,7 +103,7 @@ public class StockItemController extends MainController {
 
         respMap = new HashMap<>();
 
-        // retrieve the stockItem and extract the current stock level
+        // retrieve the stockitem and extract the current stock level
         StockItem stockItem = stockItemRepo.findByStockItemId(stockItemId);
         int newStockLevel = stockItem.getStockLevel() + newStockQty;
         stockItem.setStockLevel(newStockLevel);
@@ -110,15 +112,12 @@ public class StockItemController extends MainController {
         stockItemRepo.save(stockItem);
 
         // check that stock was updated
-
         if (stockItemRepo.findByStockItemId(stockItemId).getStockLevel() == newStockLevel) {
-
-            respMap.put("success", "1");
-            respMap.put("message", "StockItemId [" + stockItemId + "] Stock level updated by [" + newStockQty + "]");
+            respMap.put("success","1");
+            respMap.put("message","StockItemId [" + stockItemId + "] Stock Level Updated by [" + newStockQty + "]");
         } else {
-
-            respMap.put("success", "0");
-            respMap.put("message", "StockItemId [" + stockItemId + "] could not be updated");
+            respMap.put("success","0");
+            respMap.put("message","StockItemId [" + stockItemId + "] could not be updated");
         }
         return new ResponseEntity<>(respMap, httpStatus);
     }
